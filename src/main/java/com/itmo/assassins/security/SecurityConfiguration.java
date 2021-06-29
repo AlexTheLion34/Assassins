@@ -12,18 +12,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MySuccessHandler successHandler;
+    UserServiceImpl userService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Autowired
-    UserServiceImpl userService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,13 +28,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/user")
-                .hasRole("USER")
+                .antMatchers("/")
+                .permitAll()
+                .antMatchers("/user", "/add-request", "/view-request**")
+                .authenticated()
                 .and()
                 .formLogin()
-                .successHandler(successHandler);
+                .defaultSuccessUrl("/user")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login");
 
-        http.headers().frameOptions().disable();
+        http
+                .headers()
+                .frameOptions()
+                .disable();
     }
 
     @Autowired
