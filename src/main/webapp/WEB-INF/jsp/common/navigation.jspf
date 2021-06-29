@@ -1,10 +1,16 @@
-<nav role="navigation" class="navbar navbar-default">
-	<div class="navbar-collapse">
-		<ul class="nav navbar-nav">
-			<li><a href="/user">Home</a></li>
-		</ul>
-		<ul class="nav navbar-nav">
-			<li><a href="/logout">Logout</a></li>
-		</ul>
-	</div>
-</nav>
+<div style="background: #eee" >
+    <nav class="bg-dark navbar-dark container navbar navbar-expand-sm  flex-column flex-sm-row">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="/">Assassin's Creed</a>
+
+        <!-- Links -->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/user">List requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">logout</a>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -10,31 +10,31 @@
 						<form:hidden path="id" />
 						<fieldset class="form-group">
 							<form:label path="type">Type</form:label>
-							Artifact <form:radiobutton path="type" value="Artifact"/>
-							Contract kill <form:radiobutton path="type" value="Contract kill"/>
+							Artifact <form:radiobutton required="required" path="type" value="Artifact"/>
+							Contract kill <form:radiobutton required="required" path="type" value="Contract kill"/>
 						</fieldset>
 						<fieldset class="form-group">
 							<form:label path="aim">Aim</form:label>
 							<form:input path="aim" type="text" class="form-control"
 										required="required" />
-							<form:errors path="aim" cssClass="text-warning" />
+							<form:errors path="aim" cssClass="text-warning"/>
 						</fieldset>
 						<fieldset class="form-group">
 							<form:label path="price">Price</form:label>
-							<form:input path="price" type="text" class="form-control"
-										required="required" />
-							<form:errors path="price" cssClass="text-warning" />
+							<form:input path="price" type="number" class="form-control"
+										required="required" minvalue="0"/>
+							<form:errors path="price" cssClass="text-warning"/>
 						</fieldset>
 						<fieldset class="form-group">
 							<form:label path="possibleLongitude">Possible Longitude</form:label>
-							<form:input path="possibleLongitude" type="text" class="form-control"
-								required="required" />
+							<form:input path="possibleLongitude" type="number" class="form-control"
+								required="required" step="0.000000001"/>
 							<form:errors path="possibleLongitude" cssClass="text-warning" />
 						</fieldset>
 						<fieldset class="form-group">
 							<form:label path="possibleLatitude">Possible Latitude</form:label>
-							<form:input path="possibleLatitude" type="text" class="form-control"
-										required="required" />
+							<form:input path="possibleLatitude" type="number" class="form-control"
+										required="required" step="0.000000001"/>
 							<form:errors path="possibleLatitude" cssClass="text-warning" />
 						</fieldset>
 						<fieldset class="form-group">
@@ -50,3 +50,5 @@
 		</div>
 	</div>
 </div>
+
+<%@ include file="common/footer.jspf"%>
