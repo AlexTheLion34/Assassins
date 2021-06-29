@@ -1,9 +1,8 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
+<%@ page contentType="text/html;charset=utf-8" %>
 
 <div class="container">
-    <div class="alert-danger">An exception occurred! Please contact Support!</div>
+    <div class="alert-danger">Упс, ошибочка!!!</div>
 
 </div>
-
-<%@ include file="common/footer.jspf"%>

@@ -1,5 +1,5 @@
-insert into users (balance, password, username) values (100000, '$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S', 'alex');
-insert into users (balance, password, username) values (100000, '$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S', 'vasiliy');
+insert into users (balance, password, username, busy) values (5000, '$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S', 'Master', false);
+insert into users (balance, password, username, busy) values (1000, '$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S', 'Assassin', false);
 
 insert into roles (id, name) values (1, 'ROLE_CUSTOMER');
 insert into roles (id, name) values (2, 'ROLE_EXECUTOR');

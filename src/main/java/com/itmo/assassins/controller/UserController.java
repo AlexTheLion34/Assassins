@@ -1,5 +1,6 @@
 package com.itmo.assassins.controller;
 
+import com.itmo.assassins.model.Request;
 import com.itmo.assassins.model.Role;
 import com.itmo.assassins.model.User;
 import com.itmo.assassins.service.RequestService;
@@ -44,7 +45,14 @@ public class UserController extends BaseController {
 
             } else {
                 model.put("user", user);
-                model.put("task", Collections.singletonList(requestService.getRequestByExecutor(user)));
+
+                Request task = requestService.getRequestByExecutor(user);
+                if (task != null) {
+                    model.put("task", Collections.singletonList(task));
+                } else {
+                    model.put("task", Collections.emptyList());
+                }
+
             }
         }
 

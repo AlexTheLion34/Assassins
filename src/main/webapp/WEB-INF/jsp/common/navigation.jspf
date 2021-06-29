@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=utf-8"%>
 <div style="background: #eee" >
     <nav class="bg-dark navbar-dark container navbar navbar-expand-sm  flex-column flex-sm-row">
         <!-- Brand/logo -->
@@ -6,10 +7,10 @@
         <!-- Links -->
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-                <a class="nav-link" href="/user">List requests</a>
+                <a class="nav-link" href="/user">Профиль</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/logout">logout</a>
+                <a class="nav-link" href="/logout">Выйти</a>
             </li>
         </ul>
     </nav>

@@ -1,36 +1,37 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
+<%@ page contentType="text/html;charset=utf-8" %>
 
 <div class="container">
     <table>
         <tr>
-            <td width="40%">Name :</td>
+            <td width="40%">Имя пользователя :</td>
             <td width="40%">${user.username}</td>
         </tr>
         <tr>
-            <td>Balance :</td>
+            <td>Счет :</td>
             <td>${user.balance}</td>
         </tr>
     </table>
     <security:authorize access="hasRole('ROLE_CUSTOMER')">
         <div>
-            <a type="button" class="btn btn-primary btn-md" href="/add-request">New Request</a>
+            <a type="button" class="btn btn-primary btn-md" href="/add-request">Новый заказ</a>
         </div>
     </security:authorize>
     <br>
     <div class="panel panel-primary">
         <security:authorize access="hasRole('ROLE_CUSTOMER')">
             <div class="panel-heading">
-                <h3>Your requests</h3>
+                <h3>Ваши закзы</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th width="40%">Type</th>
-                        <th width="40%">Aim</th>
-                        <th width="40%">Status</th>
+                        <th width="40%">Тип</th>
+                        <th width="40%">Цель</th>
+                        <th width="40%">Статус</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,14 +41,14 @@
                             <td>${request.aim}</td>
                             <td>${request.status}</td>
                             <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${request.id}">View</a>
+                                   href="/view-request?id=${request.id}">Просмотр</a>
                             </td>
-                            <c:if test="${request.status == 'Confirmation'}">
+                            <c:if test="${request.status == 'Ожидает подтверждения'}">
                                 <td><a type="button" class="btn btn-success"
-                                       href="/view-report?id=${request.report.id}">Get report</a>
+                                       href="/view-report?id=${request.report.id}">Получить отчет</a>
                                 </td>
                                 <td><a type="button" class="btn btn-success"
-                                       href="">Confirm</a>
+                                       href="/payment?id=${request.id}">Подтвердить</a>
                                 </td>
                             </c:if>
                         </tr>
@@ -64,9 +65,9 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th width="40%">Type</th>
-                        <th width="40%">Aim</th>
-                        <th width="40%">Status</th>
+                        <th width="40%">Тип</th>
+                        <th width="40%">Цель</th>
+                        <th width="40%">Статус</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -76,7 +77,7 @@
                             <td>${t.aim}</td>
                             <td>${t.status}</td>
                             <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">View</a>
+                                   href="/view-request?id=${t.id}">Просмотр</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -86,5 +87,3 @@
         </security:authorize>
     </div>
 </div>
-
-<%@ include file="common/footer.jspf" %>

@@ -92,7 +92,7 @@ public class ReportController extends BaseController {
             report.setRequest(request);
 
             request.setReport(report);
-            request.setStatus("Confirmation");
+            request.setStatus("Ожидает подтверждения");
 
             reportService.saveReport(report);
 
