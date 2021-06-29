@@ -1,5 +1,6 @@
-<%@ include file="common/header.jspf"%>
-<%@ include file="common/navigation.jspf"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 
 <div class="container">
     <div class="row">
@@ -32,10 +33,16 @@
                         <td width="40%">${request.possibleLatitude}</td>
                     </tr>
                 </table>
-                <iframe src = "https://maps.google.com/maps?q=${request.possibleLongitude},${request.possibleLatitude}&hl=es;z=14&amp;output=embed" width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+                <iframe src="https://maps.google.com/maps?q=${request.possibleLongitude},${request.possibleLatitude}&hl=es;z=14&amp;output=embed"
+                        width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <security:authorize access="hasRole('ROLE_EXECUTOR')">
+                    <div>
+                        <a type="button" class="btn btn-primary btn-md" href="/add-report">Add report</a>
+                    </div>
+                </security:authorize>
+            </div>
         </div>
     </div>
 </div>
 
-<%@ include file="common/footer.jspf"%>
+<%@ include file="common/footer.jspf" %>

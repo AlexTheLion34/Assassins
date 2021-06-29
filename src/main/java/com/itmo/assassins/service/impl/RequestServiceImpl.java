@@ -1,6 +1,5 @@
 package com.itmo.assassins.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +13,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class RequestServiceImpl implements RequestService {
 
+	private final RequestRepository requestRepository;
+
 	@Autowired
-	private RequestRepository requestRepository;
+	public RequestServiceImpl(RequestRepository requestRepository) {
+		this.requestRepository = requestRepository;
+	}
+
+	@Override
+	public Request getRequestByExecutor(User user) {
+		return requestRepository.findByExecutor(user);
+	}
 
 	@Override
 	public List<Request> getRequestsByUser(User user) {

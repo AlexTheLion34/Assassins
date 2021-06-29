@@ -42,6 +42,14 @@
                             <td><a type="button" class="btn btn-success"
                                    href="/view-request?id=${request.id}">View</a>
                             </td>
+                            <c:if test="${request.status == 'Confirmation'}">
+                                <td><a type="button" class="btn btn-success"
+                                       href="/view-report?id=${request.report.id}">Get report</a>
+                                </td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="">Confirm</a>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -53,6 +61,27 @@
                 <h3>Current task</h3>
             </div>
             <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th width="40%">Type</th>
+                        <th width="40%">Aim</th>
+                        <th width="40%">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${task}" var="t">
+                        <tr>
+                            <td>${t.type}</td>
+                            <td>${t.aim}</td>
+                            <td>${t.status}</td>
+                            <td><a type="button" class="btn btn-success"
+                                   href="/view-request?id=${t.id}">View</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </security:authorize>
     </div>

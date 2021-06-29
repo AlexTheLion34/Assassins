@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -27,9 +24,30 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
 
+    @OneToOne
+    private Request currentTask;
+
+    private boolean busy;
+
     private Integer balance;
 
     public User() {
+    }
+
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setBusy(boolean bussy) {
+        this.busy = bussy;
+    }
+
+    public Request getCurrentTask() {
+        return currentTask;
+    }
+
+    public void setCurrentTask(Request currentTask) {
+        this.currentTask = currentTask;
     }
 
     public Long getId() {

@@ -25,14 +25,30 @@ public class Request {
 
 	@ManyToOne
 	private User owner;
+
+	@OneToOne
+	private User executor;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	private Report report;
 	
 	public Request() {
-		super();
 	}
 
-	public Request(String desc) {
-		super();
-		this.description = desc;
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
+	}
+
+	public User getExecutor() {
+		return executor;
+	}
+
+	public void setExecutor(User executor) {
+		this.executor = executor;
 	}
 
 	public String getStatus() {

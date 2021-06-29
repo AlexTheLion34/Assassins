@@ -18,11 +18,15 @@ import java.util.Optional;
 @Controller
 public class RequestController extends BaseController {
 
-	@Autowired
-	private RequestService requestService;
+	private final RequestService requestService;
+
+	private final UserServiceImpl userService;
 
 	@Autowired
-	private UserServiceImpl userService;
+	public RequestController(RequestService requestService, UserServiceImpl userService) {
+		this.requestService = requestService;
+		this.userService = userService;
+	}
 
 	@RequestMapping(value = "/view-request", method = RequestMethod.GET)
 	public String viewRequest(ModelMap model, @RequestParam String id) {
@@ -41,7 +45,7 @@ public class RequestController extends BaseController {
 	}
 
 	@RequestMapping(value = "/add-request", method = RequestMethod.POST)
-	public String addRequest(ModelMap model, Request request, BindingResult result) {
+	public String addRequest(Request request, BindingResult result) {
 
 		if (result.hasErrors()) {
 			System.out.println(result);
@@ -54,7 +58,17 @@ public class RequestController extends BaseController {
 
 		request.setOwner(user);
 		request.setStatus("In progress");
+
+		Optional<User> executor = userService.findUserByBusy();
+
+		if (executor.isPresent()) {
+			request.setExecutor(executor.get());
+			executor.get().setCurrentTask(request);
+			executor.get().setBusy(true);
+		}
+
 		requestService.saveRequest(request);
+
 		return "redirect:/user";
 	}
 }
