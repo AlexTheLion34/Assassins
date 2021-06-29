@@ -11,8 +11,8 @@
 						<form:hidden path="id" />
 						<fieldset class="form-group">
 							<form:label path="type">Тип</form:label>
-							Артифакт <form:radiobutton required="required" path="type" value="Artifact"/>
-							Заказное убийство <form:radiobutton required="required" path="type" value="Contract kill"/>
+							Артефакт <form:radiobutton required="required" path="type" value="Артефакт"/>
+							Заказное убийство <form:radiobutton required="required" path="type" value="Заказное  убийство"/>
 						</fieldset>
 						<fieldset class="form-group">
 							<form:label path="aim">Цель</form:label>
