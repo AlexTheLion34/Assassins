@@ -7,7 +7,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Новый заказ</div>
 				<div class="panel-body">
-					<form:form method="post" modelAttribute="request">
+					<form:form method="post" modelAttribute="requestInfo">
 						<form:hidden path="id" />
 						<fieldset class="form-group">
 							<form:label path="type">Тип</form:label>
@@ -35,7 +35,7 @@
 						<fieldset class="form-group">
 							<form:label path="possibleLatitude">Возможная широта</form:label>
 							<form:input path="possibleLatitude" type="number" class="form-control"
-										required="required" step="0.000000001"/>
+										required="required" step="0.1"/>
 							<form:errors path="possibleLatitude" cssClass="text-warning" />
 						</fieldset>
 						<fieldset class="form-group">

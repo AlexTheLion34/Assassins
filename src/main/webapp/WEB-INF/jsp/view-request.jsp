@@ -36,11 +36,11 @@
                 </table>
                 <iframe src="https://maps.google.com/maps?q=${request.possibleLongitude},${request.possibleLatitude}&hl=es;z=14&amp;output=embed"
                         width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                <security:authorize access="hasRole('ROLE_EXECUTOR')">
+                <c:if test="${user.getRole().name() eq 'EXECUTOR'}">
                     <div>
                         <a type="button" class="btn btn-primary btn-md" href="/add-report">Добавить отчет</a>
                     </div>
-                </security:authorize>
+                </c:if>
             </div>
         </div>
     </div>
