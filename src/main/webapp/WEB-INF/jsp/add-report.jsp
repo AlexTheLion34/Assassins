@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     <form:form method="post" action="/add-report" enctype="multipart/form-data">
                         <p><input name="file" id="fileToUpload" type="file" required="required"/></p>
-                        <p><input type="submit" value="Загрузить отчет"></p>
+                        <p><input type="submit" class="btn btn-primary btn-md" value="Загрузить отчет"></p>
                     </form:form>
                 </div>
             </div>

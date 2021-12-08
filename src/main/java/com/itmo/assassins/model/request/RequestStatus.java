@@ -7,6 +7,7 @@ public enum RequestStatus {
     PACKING_2("Снаряжение поездки"),
     EXECUTING("Исполнение"),
     CONFIRMING("Ожидает подтверждения"),
+    PAYMENT_CONFIRMING("Подтверждение оплаты"),
     DONE("Выполнен");
 
     public final String label;

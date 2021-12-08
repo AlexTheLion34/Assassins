@@ -7,7 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "assassins_user")
+@Inheritance(
+        strategy = InheritanceType.JOINED
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,11 +26,4 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    private boolean busy;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private UserInfo userInfo;
-
 }

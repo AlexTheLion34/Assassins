@@ -1,6 +1,9 @@
 package com.itmo.assassins.controller;
 
 import com.itmo.assassins.model.request.Request;
+import com.itmo.assassins.model.request.RequestStatus;
+import com.itmo.assassins.model.user.Customer;
+import com.itmo.assassins.model.user.Executor;
 import com.itmo.assassins.model.user.User;
 import com.itmo.assassins.service.request.RequestService;
 import com.itmo.assassins.service.user.UserSecurityService;
@@ -43,7 +46,7 @@ public class PaymentController {
 
         model.put("user", user);
         model.put("id", id);
-//		request.ifPresent(req -> model.addAttribute("price", req.getPrice()));
+        request.ifPresent(req -> model.addAttribute("price", req.getRequestInfo().getPrice()));
 
         return "payment";
     }
@@ -55,18 +58,36 @@ public class PaymentController {
 
         if (request.isPresent()) {
 
-//			Integer price = request.get().getPrice();
-//
-//			User owner = request.get().getOwner();
-//			User executor = request.get().getExecutor();
+            Integer price = request.get().getRequestInfo().getPrice();
 
-//			owner.setBalance(owner.getBalance() - price);
-//			executor.setBalance(executor.getBalance() + price);
-//			executor.setCurrentTask(null);
-//			executor.setBusy(false);
+            Customer owner = request.get().getOwner();
+            Executor executor = request.get().getExecutor();
 
-//			request.get().setExecutor(null);
-            //request.get().setStatus("Выполнен");
+            owner.setBalance(owner.getBalance() - price);
+            executor.setBalance(executor.getBalance() + price);
+
+            request.get().getRequestInfo().setStatus(RequestStatus.PAYMENT_CONFIRMING);
+
+            requestService.saveRequest(request.get());
+        }
+
+        return "redirect:/profile";
+    }
+
+    @RequestMapping(value = "/payment-confirm", method = RequestMethod.POST)
+    public String paymentConfirm(@RequestParam String id) {
+
+        Optional<Request> request = requestService.getRequestById(Long.parseLong(id));
+
+        if (request.isPresent()) {
+
+            Executor executor = request.get().getExecutor();
+
+            request.get().getRequestInfo().setStatus(RequestStatus.DONE);
+
+            executor.setCurrentTask(null);
+            executor.setBusy(false);
+            request.get().setExecutor(null);
 
             requestService.saveRequest(request.get());
         }

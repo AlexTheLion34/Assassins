@@ -1,5 +1,6 @@
 package com.itmo.assassins.service.impl.user;
 
+import com.itmo.assassins.model.user.Executor;
 import com.itmo.assassins.model.user.UserRole;
 import com.itmo.assassins.model.user.User;
 import com.itmo.assassins.repository.user.UserRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,8 +26,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<User> findExecutorsByBusy() {
-        return userRepository.findByRoleAndBusyFalse(UserRole.EXECUTOR);
+    public Set<Executor> findExecutorsByBusy() {
+        return userRepository.findByRole(UserRole.EXECUTOR)
+                .stream()
+                .filter(user -> user instanceof Executor)
+                .map(u -> ((Executor) u))
+                .filter(u -> !u.getBusy())
+                .collect(Collectors.toSet());
     }
 
     @Override

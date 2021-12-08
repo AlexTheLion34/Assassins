@@ -1,8 +1,8 @@
 package com.itmo.assassins.controller.report;
 
 import com.itmo.assassins.model.report.Report;
+import com.itmo.assassins.model.user.Executor;
 import com.itmo.assassins.service.report.ReportService;
-import com.itmo.assassins.service.request.RequestService;
 import com.itmo.assassins.service.user.UserSecurityService;
 import com.itmo.assassins.service.impl.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,26 +30,22 @@ public class ReportController {
 
     private final UserSecurityService securityService;
 
-    private final RequestService requestService;
-
     private final ReportService reportService;
 
     @Autowired
     public ReportController(UserServiceImpl userService,
                             UserSecurityService securityService,
-                            RequestService requestService,
                             ReportService reportService) {
 
         this.userService = userService;
         this.securityService = securityService;
-        this.requestService = requestService;
         this.reportService = reportService;
     }
 
     @RequestMapping(value = "/view-report", method = RequestMethod.GET)
     public ResponseEntity<Resource> viewReport(@RequestParam String id) throws IOException {
 
-        Report report = reportService.getRequestById(Long.parseLong(id));
+        Report report = reportService.getReportById(Long.parseLong(id));
 
         Path pathToFile = Paths.get(report.getPath());
 
@@ -82,25 +78,11 @@ public class ReportController {
 
         try {
 
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get("storage/" + file.getOriginalFilename());
-            Files.write(path, bytes);
+            String userName = securityService.getLoggedInUserName();
 
-//            String userName = securityService.getLoggedInUserName();
-//
-//            User user = userService.findUserByUserName(userName);
-//
-//            Request request = requestService.getRequestByExecutor(user);
+            Executor executor = (Executor) userService.findUserByUserName(userName);
 
-//            Report report = new Report();
-//
-//            report.setPath(path.toString());
-//            report.setRequest(request);
-
-//            request.setReport(report);
-            //request.setStatus("Ожидает подтверждения");
-
-//            reportService.saveReport(report);
+            reportService.createReport(file, executor);
 
         } catch (IOException e) {
             e.printStackTrace();

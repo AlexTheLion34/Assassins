@@ -9,10 +9,12 @@
             <td width="40%">Имя пользователя :</td>
             <td width="40%">${user.username}</td>
         </tr>
-        <tr>
-            <td>Счет :</td>
-            <td>${userInfo.balance}</td>
-        </tr>
+        <c:if test="${user.getRole().name() eq 'CUSTOMER' or user.getRole().name() eq 'EXECUTOR'}">
+            <tr>
+                <td>Счет :</td>
+                <td>${user.balance}</td>
+            </tr>
+        </c:if>
     </table>
     <c:if test="${user.getRole().name() eq 'CUSTOMER'}">
         <div>
@@ -43,14 +45,14 @@
                             <td><a type="button" class="btn btn-success"
                                    href="/view-request?id=${request.id}">Просмотр</a>
                             </td>
-<%--                            <c:if test="${request.requestInfo.status == 'Ожидает подтверждения'}">--%>
-<%--                                <td><a type="button" class="btn btn-success"--%>
-<%--                                       href="/view-report?id=${request.report.id}">Получить отчет</a>--%>
-<%--                                </td>--%>
-<%--                                <td><a type="button" class="btn btn-success"--%>
-<%--                                       href="/payment?id=${request.id}">Подтвердить</a>--%>
-<%--                                </td>--%>
-<%--                            </c:if>--%>
+                            <c:if test="${request.requestInfo.status eq 'CONFIRMING'}">
+                                <td><a type="button" class="btn btn-success"
+                                       href="/view-report?id=${request.report.id}">Получить отчет</a>
+                                </td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/payment?id=${request.id}">Подтвердить</a>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -79,6 +81,13 @@
                             <td><a type="button" class="btn btn-success"
                                    href="/view-request?id=${t.id}">Просмотр</a>
                             </td>
+                            <c:if test="${t.requestInfo.status eq 'PAYMENT_CONFIRMING'}">
+                                <td>
+                                    <form:form method="post" action="/payment-confirm?id=${t.id}">
+                                        <button type="submit" class="btn btn-primary button">Подтвердить</button>
+                                    </form:form>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>

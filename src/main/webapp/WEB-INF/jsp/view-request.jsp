@@ -11,30 +11,31 @@
                 <table>
                     <tr>
                         <td width="40%">Тип :</td>
-                        <td width="40%">${request.type}</td>
+                        <td width="40%">${request.requestInfo.type}</td>
                     </tr>
                     <tr>
                         <td width="40%">Цель :</td>
-                        <td width="40%">${request.aim}</td>
+                        <td width="40%">${request.requestInfo.aim}</td>
                     </tr>
                     <tr>
                         <td width="40%">Цена :</td>
-                        <td width="40%">${request.price}</td>
+                        <td width="40%">${request.requestInfo.price}</td>
                     </tr>
                     <tr>
                         <td width="40%">Описание :</td>
-                        <td width="40%">${request.description}</td>
+                        <td width="40%">${request.requestInfo.description}</td>
                     </tr>
                     <tr>
                         <td width="40%">Возможная долгота :</td>
-                        <td width="40%">${request.possibleLongitude}</td>
+                        <td width="40%">${request.requestInfo.possibleLongitude}</td>
                     </tr>
                     <tr>
                         <td width="40%">Возможная ширина :</td>
-                        <td width="40%">${request.possibleLatitude}</td>
+                        <td width="40%">${request.requestInfo.possibleLatitude}</td>
                     </tr>
                 </table>
-                <iframe src="https://maps.google.com/maps?q=${request.possibleLongitude},${request.possibleLatitude}&hl=es;z=14&amp;output=embed"
+                <iframe src="https://maps.google.com/maps?q=${request.requestInfo.possibleLongitude},
+                ${request.requestInfo.possibleLatitude}&hl=es;z=14&amp;output=embed"
                         width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 <c:if test="${user.getRole().name() eq 'EXECUTOR'}">
                     <div>

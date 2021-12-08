@@ -14,10 +14,10 @@ import javax.persistence.*;
 public class Report {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     private Request request;
 
     private String path;

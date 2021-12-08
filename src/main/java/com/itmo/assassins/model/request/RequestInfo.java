@@ -1,6 +1,5 @@
 package com.itmo.assassins.model.request;
 
-import com.itmo.assassins.model.report.Report;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,10 +37,4 @@ public class RequestInfo {
 
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private Report report;
-
-    @OneToOne
-    private RequestArsenal arsenal;
 }
