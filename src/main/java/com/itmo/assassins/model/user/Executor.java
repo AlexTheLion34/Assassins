@@ -14,7 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Executor extends User {
 
-    @OneToOne(mappedBy = "executor")
+    @OneToOne(mappedBy = "executor", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private Request currentTask;
 
     private Integer balance;

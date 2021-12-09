@@ -1,9 +1,7 @@
 package com.itmo.assassins.model.request;
 
 import com.itmo.assassins.model.report.Report;
-import com.itmo.assassins.model.user.Customer;
-import com.itmo.assassins.model.user.Executor;
-import com.itmo.assassins.model.user.Cabman;
+import com.itmo.assassins.model.user.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,17 +41,16 @@ public class Request {
 
 	@ManyToOne
 	@JoinColumn(name="master_id")
-	private Cabman master;
+	private Master master;
 
 	@ManyToOne
 	@JoinColumn(name="gunsmith_id")
-	private Cabman gunsmith;
+	private Gunsmith gunsmith;
 
 	@ManyToOne
 	@JoinColumn(name="cabman_id")
 	private Cabman cabman;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="executor_id")
+	@OneToOne(fetch = FetchType.LAZY)
 	private Executor executor;
 }
