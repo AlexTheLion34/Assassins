@@ -11,9 +11,4 @@
             </li>
         </ul>
     </nav>
-    <%if (session.getAttribute("windowNameToSet") != null) {
-        out.write("window.name = '"
-                + session.getAttribute("windowNameToSet") + "';");
-        session.removeAttribute("windowNameToSet");
-    }%>
 </div>

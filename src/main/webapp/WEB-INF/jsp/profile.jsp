@@ -48,7 +48,7 @@
                             <td>${request.requestInfo.type}</td>
                             <td>${request.requestInfo.aim}</td>
                             <td>${request.requestInfo.status.getLabel()}</td>
-                            <td><a type="button" class="btn btn-success"
+                            <td><a type="button" class="btn btn-primary btn-md"
                                    href="/view-request?id=${request.id}">Просмотр</a>
                             </td>
                             <c:if test="${request.requestInfo.status eq 'CONFIRMING'}">
@@ -60,7 +60,7 @@
                                 </td>
                             </c:if>
                             <c:if test="${request.requestInfo.status eq 'EVALUATING'}">
-                                <td><a type="button" class="btn btn-success"
+                                <td><a type="button" class="btn btn-primary btn-md"
                                        href="/evaluate?id=${request.id}">Оценить</a>
                                 </td>
                             </c:if>
@@ -91,7 +91,7 @@
                                 <td>${t.requestInfo.type}</td>
                                 <td>${t.requestInfo.aim}</td>
                                 <td>${t.requestInfo.status.getLabel()}</td>
-                                <td><a type="button" class="btn btn-success"
+                                <td><a type="button" class="btn btn-primary btn-md"
                                        href="/view-request?id=${t.id}">Просмотр</a>
                                 </td>
                                 <c:if test="${t.requestInfo.status eq 'PAYMENT_CONFIRMING'}">
@@ -128,7 +128,7 @@
                                 <td>${t.requestInfo.type}</td>
                                 <td>${t.requestInfo.aim}</td>
                                 <td>${t.requestInfo.status.getLabel()}</td>
-                                <td><a type="button" class="btn btn-success"
+                                <td><a type="button" class="btn btn-primary btn-md"
                                        href="/view-request?id=${t.id}">Просмотр</a>
                                 </td>
                                 <td><a type="button" class="btn btn-warning"
@@ -164,7 +164,7 @@
                                 <td>${t.requestInfo.type}</td>
                                 <td>${t.requestInfo.aim}</td>
                                 <td>${t.requestInfo.status.getLabel()}</td>
-                                <td><a type="button" class="btn btn-success"
+                                <td><a type="button" class="btn btn-primary btn-md"
                                        href="/view-request?id=${t.id}">Просмотр</a>
                                 </td>
                                 <td><a type="button" class="btn btn-success"
@@ -197,7 +197,7 @@
                                 <td>${t.requestInfo.type}</td>
                                 <td>${t.requestInfo.aim}</td>
                                 <td>${t.requestInfo.status.getLabel()}</td>
-                                <td><a type="button" class="btn btn-success"
+                                <td><a type="button" class="btn btn-primary btn-md"
                                        href="/view-request?id=${t.id}">Просмотр</a>
                                 </td>
                                 <td><a type="button" class="btn btn-success"

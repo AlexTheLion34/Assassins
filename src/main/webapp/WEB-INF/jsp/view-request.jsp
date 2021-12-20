@@ -54,7 +54,12 @@
                     <c:if test="${request.roadEquipment != null and user.getRole().name() eq 'EXECUTOR'}">
                         <tr>
                             <td width="40%">Повозка :</td>
-                            <td width="40%">${request.roadEquipment.carriageRequired}</td>
+                            <c:if test="${request.roadEquipment.carriageRequired eq false}">
+                            <td width="40%">Не требуется</td>
+                            </c:if>
+                            <c:if test="${request.roadEquipment.carriageRequired eq true}">
+                                <td width="40%">Подготовлена</td>
+                            </c:if>
                         </tr>
                         <tr>
                             <td width="40%">Комлект луков и стрел :</td>

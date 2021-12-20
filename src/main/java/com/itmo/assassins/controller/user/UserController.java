@@ -25,6 +25,11 @@ public class UserController {
         this.securityService = securityService;
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profilePage(ModelMap model) {
