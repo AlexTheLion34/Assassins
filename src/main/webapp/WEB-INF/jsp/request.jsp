@@ -23,7 +23,7 @@
 						<fieldset class="form-group">
 							<form:label path="price">Цена</form:label>
 							<form:input path="price" type="number" class="form-control"
-										required="required" minvalue="0"/>
+										required="required" min="0" />
 							<form:errors path="price" cssClass="text-warning"/>
 						</fieldset>
 						<fieldset class="form-group">

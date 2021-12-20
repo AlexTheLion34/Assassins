@@ -23,4 +23,6 @@ public class Executor extends User {
     private Boolean busy;
 
     private Double rating;
+
+    private int numOfCompletedRequests;
 }

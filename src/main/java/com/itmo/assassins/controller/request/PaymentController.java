@@ -1,10 +1,8 @@
-package com.itmo.assassins.controller;
+package com.itmo.assassins.controller.request;
 
 import com.itmo.assassins.model.request.Request;
-import com.itmo.assassins.model.request.RequestStatus;
-import com.itmo.assassins.model.user.Customer;
-import com.itmo.assassins.model.user.Executor;
 import com.itmo.assassins.model.user.User;
+import com.itmo.assassins.service.request.PaymentService;
 import com.itmo.assassins.service.request.RequestService;
 import com.itmo.assassins.service.user.UserSecurityService;
 import com.itmo.assassins.service.user.UserService;
@@ -22,16 +20,20 @@ public class PaymentController {
 
     private final RequestService requestService;
 
+    private final PaymentService paymentService;
+
     private final UserService userService;
 
     private final UserSecurityService securityService;
 
     @Autowired
     public PaymentController(RequestService requestService,
+                             PaymentService paymentService,
                              UserService userService,
                              UserSecurityService securityService) {
 
         this.requestService = requestService;
+        this.paymentService = paymentService;
         this.userService = userService;
         this.securityService = securityService;
     }
@@ -56,20 +58,7 @@ public class PaymentController {
 
         Optional<Request> request = requestService.getRequestById(Long.parseLong(id));
 
-        if (request.isPresent()) {
-
-            Integer price = request.get().getRequestInfo().getPrice();
-
-            Customer owner = request.get().getOwner();
-            Executor executor = request.get().getExecutor();
-
-            owner.setBalance(owner.getBalance() - price);
-            executor.setBalance(executor.getBalance() + price);
-
-            request.get().getRequestInfo().setStatus(RequestStatus.PAYMENT_CONFIRMING);
-
-            requestService.saveRequest(request.get());
-        }
+        request.ifPresent(paymentService::processPayment);
 
         return "redirect:/profile";
     }
@@ -79,18 +68,7 @@ public class PaymentController {
 
         Optional<Request> request = requestService.getRequestById(Long.parseLong(id));
 
-        if (request.isPresent()) {
-
-            Executor executor = request.get().getExecutor();
-
-            request.get().getRequestInfo().setStatus(RequestStatus.DONE);
-
-            executor.setCurrentTask(null);
-            executor.setBusy(false);
-            request.get().setExecutor(null);
-
-            requestService.saveRequest(request.get());
-        }
+        request.ifPresent(paymentService::confirmPayment);
 
         return "redirect:/profile";
     }

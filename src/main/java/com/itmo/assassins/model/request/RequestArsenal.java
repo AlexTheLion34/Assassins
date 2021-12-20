@@ -14,12 +14,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class RequestArsenal {
 
-    // TODO: - add fields like num swords, archers, knives, shields
-
     @Id
     private long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private Request request;
+
+    private int numOfSwords;
+
+    private int numOfBows;
+
+    private int numOfShields;
+
+    private int numOfKnives;
 }

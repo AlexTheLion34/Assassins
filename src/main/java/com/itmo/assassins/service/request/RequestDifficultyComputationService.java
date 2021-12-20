@@ -1,6 +1,5 @@
 package com.itmo.assassins.service.request;
 
-import com.itmo.assassins.model.request.Request;
 import com.itmo.assassins.model.request.RequestDifficulty;
 import com.itmo.assassins.model.request.RequestInfo;
 

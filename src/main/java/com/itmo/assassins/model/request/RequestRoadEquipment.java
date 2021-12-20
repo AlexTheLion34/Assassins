@@ -13,12 +13,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class RequestRoadEquipment {
 
-    // TODO: - add fields like povozka, num of horses
-
     @Id
     private long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private Request request;
+
+    private boolean carriageRequired;
+
+    private int numOfHorses;
 }

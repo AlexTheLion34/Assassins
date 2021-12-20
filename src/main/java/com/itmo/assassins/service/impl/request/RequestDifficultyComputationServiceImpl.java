@@ -11,8 +11,37 @@ public class RequestDifficultyComputationServiceImpl implements RequestDifficult
     @Override
     public RequestDifficulty computeDifficulty(RequestInfo requestInfo) {
 
-        //TODO: - remove stub
+        Double longitude = requestInfo.getPossibleLongitude();
+        Double latitude = requestInfo.getPossibleLatitude();
 
-        return RequestDifficulty.MEDIUM;
+        Hemisphere southernOrNorthern;
+
+        if (latitude >= 0.0) {
+            southernOrNorthern = Hemisphere.NORTHERN;
+        } else {
+            southernOrNorthern = Hemisphere.SOUTHERN;
+        }
+
+        Hemisphere westernOrEastern;
+
+        if (longitude >= 0) {
+            westernOrEastern = Hemisphere.EASTERN;
+        } else {
+            westernOrEastern = Hemisphere.WESTERN;
+        }
+
+        if (southernOrNorthern == Hemisphere.NORTHERN && westernOrEastern == Hemisphere.EASTERN) {
+            return RequestDifficulty.HARD;
+        } else if (southernOrNorthern == Hemisphere.NORTHERN) {
+            return RequestDifficulty.MEDIUM;
+        } else if (westernOrEastern == Hemisphere.EASTERN) {
+            return RequestDifficulty.MEDIUM;
+        } else {
+            return RequestDifficulty.LOW;
+        }
+    }
+
+    private enum Hemisphere {
+        NORTHERN, SOUTHERN, WESTERN, EASTERN
     }
 }

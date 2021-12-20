@@ -8,7 +8,6 @@ import com.itmo.assassins.service.request.RequestDifficultyComputationService;
 import com.itmo.assassins.service.request.RequestService;
 import com.itmo.assassins.service.user.UserSecurityService;
 import com.itmo.assassins.service.user.UserService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -53,18 +51,24 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/add-request", method = RequestMethod.POST)
-    public String addRequest(RequestInfo requestInfo, BindingResult result) {
+    public String addRequest(RequestInfo requestInfo) {
 
-        if (result.hasErrors()) {
-            System.out.println(result);
-            return "request";
+        User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
+
+        if (requestInfo.getPrice() + ((Customer) currentUser).getRequests()
+                .stream()
+                .map(r -> r.getRequestInfo().getPrice())
+                .reduce(0, Integer::sum) > ((Customer) currentUser).getBalance()) {
+            return "price-error";
         }
 
         requestInfo.setDifficulty(difficultyComputationService.computeDifficulty(requestInfo));
 
-        User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
-
-        requestService.createRequest(requestInfo, (Customer) currentUser);
+        try {
+            requestService.createRequest(requestInfo, (Customer) currentUser);
+        } catch (Exception e) {
+            return "executor-error";
+        }
 
         return "redirect:/profile";
     }
@@ -94,117 +98,47 @@ public class RequestController {
             model.put("user", currentUser);
             model.put("id", id);
 
-            switch (currentUser.getRole()) {
-                case MASTER_ASSASSIN:
-                    model.put("executor", req.getExecutor());
-                    model.put("cabman", req.getCabman());
-                    model.put("gunsmith", req.getGunsmith());
-                    break;
-                case GUNSMITH:
-                    System.out.println("kek");
-                    break;
-                default:
-                    break;
+            if (currentUser.getRole() == UserRole.MASTER_ASSASSIN) {
+                model.put("executor", req.getExecutor());
+                model.put("cabman", req.getCabman());
+                model.put("gunsmith", req.getGunsmith());
             }
         });
 
         return "change-request";
     }
 
-    @RequestMapping(value = "/change-team", method = RequestMethod.GET)
-    public String changeMember(ModelMap model, @RequestParam String requestId, @RequestParam String role) {
-
-        Optional<Request> request = requestService.getRequestById(Long.parseLong(requestId));
-
-        request.ifPresent(req -> {
-
-            User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
-            model.put("user", currentUser);
-            model.put("id", requestId);
-
-            switch (UserRole.valueOf(role)) {
-                case EXECUTOR:
-                    model.put("title", "Ассассины");
-                    model.put("team", userService.findUserByRole(UserRole.EXECUTOR));
-                    break;
-                case GUNSMITH:
-                    model.put("title", "Оружейники");
-                    model.put("team", userService.findUserByRole(UserRole.GUNSMITH));
-                    break;
-                default:
-                    model.put("title", "Извозчики");
-                    model.put("team", userService.findUserByRole(UserRole.CABMAN));
-                    break;
-            }
-        });
-
-        return "change-team";
-    }
-
-    // TODO: - move logic to request service from two below methods
-
-    @RequestMapping(value = "/change-team", method = RequestMethod.POST)
-    public String changeMemberPost(@RequestParam String requestId, @RequestParam String userToChangeId) {
-
-        Optional<Request> request = requestService.getRequestById(Long.parseLong(requestId));
-
-        request.ifPresent(req -> {
-
-            User userToChange = Hibernate.unproxy(userService.findUserById(Long.parseLong(userToChangeId)), User.class);
-
-            switch (userToChange.getRole()) {
-                case EXECUTOR:
-                    req.getExecutor().setBusy(false);
-                    ((Executor) userToChange).setBusy(true);
-                    req.setExecutor(((Executor) userToChange));
-                    break;
-                case CABMAN:
-                    req.setCabman((Cabman) userToChange);
-                    break;
-                case GUNSMITH:
-                    req.setGunsmith((Gunsmith) userToChange);
-                    break;
-            }
-            requestService.saveRequest(req);
-        });
-
-        return "redirect:/change-request?id=" + requestId;
-    }
-
     @RequestMapping(value = "/confirm-request", method = RequestMethod.GET)
-    public String confirmRequest(@RequestParam String requestId, @RequestParam String role) {
+    public String confirmRequest(@RequestParam String requestId) {
 
         Optional<Request> request = requestService.getRequestById(Long.parseLong(requestId));
 
         User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
 
-        request.ifPresent(req -> {
+        request.ifPresent(req -> requestService.confirmRequest(req, currentUser));
 
-            switch (UserRole.valueOf(role)) {
-                case MASTER_ASSASSIN:
-                    List<Request> masterRequests = ((Master) currentUser).getRequests();
-                    masterRequests.remove(req);
-                    ((Master) currentUser).setRequests(masterRequests);
-                    req.getRequestInfo().setStatus(RequestStatus.PACKING_1);
-                    req.setMaster(null);
-                    break;
-                case CABMAN:
-                    List<Request> cabmanRequests = ((Cabman) currentUser).getRequests();
-                    cabmanRequests.remove(req);
-                    ((Cabman) currentUser).setRequests(cabmanRequests);
-                    req.getRequestInfo().setStatus(RequestStatus.PACKING_2);
-                    req.setCabman(null);
-                    break;
-                case GUNSMITH:
-                    List<Request> gunsmithRequests = ((Gunsmith) currentUser).getRequests();
-                    gunsmithRequests.remove(req);
-                    ((Gunsmith) currentUser).setRequests(gunsmithRequests);
-                    req.getRequestInfo().setStatus(RequestStatus.EXECUTING);
-                    req.setGunsmith(null);
-                    break;
-            }
-            requestService.saveRequest(req);
-            //userService.saveUser(currentUser); проверить, нужно ли???
+        return "redirect:/profile";
+    }
+
+    @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
+    public String putRatingForOrder(ModelMap model, @RequestParam String id) {
+
+        Optional<Request> request = requestService.getRequestById(Long.parseLong(id));
+
+        request.ifPresent(req -> model.put("request", req));
+
+        return "evaluate-request";
+    }
+
+    @RequestMapping(value = "/evaluate", method = RequestMethod.POST)
+    public String putRatingForOrder(Request request, @RequestParam String requestId) {
+
+        Optional<Request> requestFromRepo = requestService.getRequestById(Long.parseLong(requestId));
+
+        requestFromRepo.ifPresent(req -> {
+            Request updatedRequest = requestService.putRatingForRequest(req, request.getRequestInfo().getRating());
+            userService.countRating(updatedRequest.getExecutor(), updatedRequest.getRequestInfo().getRating());
+            requestService.saveRequest(updatedRequest);
         });
 
         return "redirect:/profile";

@@ -28,7 +28,7 @@
                     <tbody>
                     <tr>
                         <td>${executor.username}</td>
-                        <td>${executor.role}</td>
+                        <td>${executor.role.getLabel()}</td>
                         <td>${executor.rating}</td>
                         <td><a type="button" class="btn btn-danger"
                                href="/change-team?requestId=${id}&role=${executor.role}">Изменить</a>
@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                         <td>${gunsmith.username}</td>
-                        <td>${gunsmith.role}</td>
+                        <td>${gunsmith.role.getLabel()}</td>
                         <td></td>
                         <td><a type="button" class="btn btn-danger"
                                href="/change-team?requestId=${id}&role=${gunsmith.role}">Изменить</a>
@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td>${cabman.username}</td>
-                        <td>${cabman.role}</td>
+                        <td>${cabman.role.getLabel()}</td>
                         <td></td>
                         <td><a type="button" class="btn btn-danger"
                                href="/change-team?requestId=${id}&role=${cabman.role}">Изменить</a>

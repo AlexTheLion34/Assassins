@@ -38,6 +38,7 @@ public class UserController {
         switch (userRole) {
             case CUSTOMER:
                 model.put("requests", ((Customer) user).getRequests());
+                model.put("customer", user);
                 break;
             case EXECUTOR:
                 Request currentTask = ((Executor) user).getCurrentTask();

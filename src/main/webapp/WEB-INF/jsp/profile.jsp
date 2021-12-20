@@ -15,6 +15,12 @@
                 <td>${user.balance}</td>
             </tr>
         </c:if>
+        <c:if test="${user.getRole().name() eq 'EXECUTOR'}">
+            <tr>
+                <td>Рейтинг :</td>
+                <td>${user.rating}</td>
+            </tr>
+        </c:if>
     </table>
     <c:if test="${user.getRole().name() eq 'CUSTOMER'}">
         <div>
@@ -41,7 +47,7 @@
                         <tr>
                             <td>${request.requestInfo.type}</td>
                             <td>${request.requestInfo.aim}</td>
-                            <td>${request.requestInfo.status}</td>
+                            <td>${request.requestInfo.status.getLabel()}</td>
                             <td><a type="button" class="btn btn-success"
                                    href="/view-request?id=${request.id}">Просмотр</a>
                             </td>
@@ -50,7 +56,12 @@
                                        href="/view-report?id=${request.report.id}">Получить отчет</a>
                                 </td>
                                 <td><a type="button" class="btn btn-success"
-                                       href="/payment?id=${request.id}">Подтвердить</a>
+                                       href="/payment?id=${request.id}">Оплатить</a>
+                                </td>
+                            </c:if>
+                            <c:if test="${request.requestInfo.status eq 'EVALUATING'}">
+                                <td><a type="button" class="btn btn-success"
+                                       href="/evaluate?id=${request.id}">Оценить</a>
                                 </td>
                             </c:if>
                         </tr>
@@ -74,21 +85,24 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${tasks}" var="t">
-                        <tr>
-                            <td>${t.requestInfo.type}</td>
-                            <td>${t.requestInfo.aim}</td>
-                            <td>${t.requestInfo.status}</td>
-                            <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">Просмотр</a>
-                            </td>
-                            <c:if test="${t.requestInfo.status eq 'PAYMENT_CONFIRMING'}">
-                                <td>
-                                    <form:form method="post" action="/payment-confirm?id=${t.id}">
-                                        <button type="submit" class="btn btn-primary button">Подтвердить</button>
-                                    </form:form>
+                        <c:if test="${t.requestInfo.status eq 'EXECUTING' or t.requestInfo.status eq 'CONFIRMING' or
+                        t.requestInfo.status eq 'EVALUATING' or t.requestInfo.status eq 'PAYMENT_CONFIRMING'}">
+                            <tr>
+                                <td>${t.requestInfo.type}</td>
+                                <td>${t.requestInfo.aim}</td>
+                                <td>${t.requestInfo.status.getLabel()}</td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/view-request?id=${t.id}">Просмотр</a>
                                 </td>
-                            </c:if>
-                        </tr>
+                                <c:if test="${t.requestInfo.status eq 'PAYMENT_CONFIRMING'}">
+                                    <td>
+                                        <form:form method="post" action="/payment-confirm?id=${t.id}">
+                                            <button type="submit" class="btn btn-primary button">Подтвердить</button>
+                                        </form:form>
+                                    </td>
+                                </c:if>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -109,17 +123,22 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${tasks}" var="t">
-                        <tr>
-                            <td>${t.requestInfo.type}</td>
-                            <td>${t.requestInfo.aim}</td>
-                            <td>${t.requestInfo.status}</td>
-                            <td><a type="button" class="btn btn-warning"
-                                   href="/change-request?id=${t.id}">Редактировать</a>
-                            </td>
-                            <td><a type="button" class="btn btn-success"
-                                   href="/confirm-request?requestId=${t.id}&role=${user.getRole()}">Подтвердить</a>
-                            </td>
-                        </tr>
+                        <c:if test="${t.requestInfo.status eq 'MODERATING'}">
+                            <tr>
+                                <td>${t.requestInfo.type}</td>
+                                <td>${t.requestInfo.aim}</td>
+                                <td>${t.requestInfo.status.getLabel()}</td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/view-request?id=${t.id}">Просмотр</a>
+                                </td>
+                                <td><a type="button" class="btn btn-warning"
+                                       href="/change-request?id=${t.id}">Редактировать</a>
+                                </td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/confirm-request?requestId=${t.id}">Подтвердить</a>
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -140,17 +159,19 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${tasks}" var="t">
-                        <tr>
-                            <td>${t.requestInfo.type}</td>
-                            <td>${t.requestInfo.aim}</td>
-                            <td>${t.requestInfo.status}</td>
-                            <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">Укомплектовать</a>
-                            </td>
-                            <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">Подтвердить</a>
-                            </td>
-                        </tr>
+                        <c:if test="${t.requestInfo.status eq 'PACKING_1'}">
+                            <tr>
+                                <td>${t.requestInfo.type}</td>
+                                <td>${t.requestInfo.aim}</td>
+                                <td>${t.requestInfo.status.getLabel()}</td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/view-request?id=${t.id}">Просмотр</a>
+                                </td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/add-arsenal?id=${t.id}">Укомплектовать</a>
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -171,17 +192,19 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${tasks}" var="t">
-                        <tr>
-                            <td>${t.requestInfo.type}</td>
-                            <td>${t.requestInfo.aim}</td>
-                            <td>${t.requestInfo.status}</td>
-                            <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">Снарядить</a>
-                            </td>
-                            <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">Подтвердить</a>
-                            </td>
-                        </tr>
+                        <c:if test="${t.requestInfo.status eq 'PACKING_2'}">
+                            <tr>
+                                <td>${t.requestInfo.type}</td>
+                                <td>${t.requestInfo.aim}</td>
+                                <td>${t.requestInfo.status.getLabel()}</td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/view-request?id=${t.id}">Просмотр</a>
+                                </td>
+                                <td><a type="button" class="btn btn-success"
+                                       href="/add-road-eq?id=${t.id}">Снарядить</a>
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>

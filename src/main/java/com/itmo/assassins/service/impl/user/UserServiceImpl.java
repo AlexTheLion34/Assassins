@@ -49,4 +49,11 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public void countRating(Executor executor, int requestRating) {
+        executor.setRating((executor.getRating() + requestRating) / (executor.getNumOfCompletedRequests() + 1));
+        executor.setNumOfCompletedRequests(executor.getNumOfCompletedRequests() + 1);
+        saveUser(executor);
+    }
 }

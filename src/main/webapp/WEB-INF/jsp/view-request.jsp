@@ -33,6 +33,34 @@
                         <td width="40%">Возможная ширина :</td>
                         <td width="40%">${request.requestInfo.possibleLatitude}</td>
                     </tr>
+                    <c:if test="${request.arsenal != null and user.getRole().name() eq 'EXECUTOR'}">
+                        <tr>
+                            <td width="40%">Мечи :</td>
+                            <td width="40%">${request.arsenal.numOfSwords}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Комлект луков и стрел :</td>
+                            <td width="40%">${request.arsenal.numOfBows}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Ножи :</td>
+                            <td width="40%">${request.arsenal.numOfKnives}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Шиты :</td>
+                            <td width="40%">${request.arsenal.numOfShields}</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${request.roadEquipment != null and user.getRole().name() eq 'EXECUTOR'}">
+                        <tr>
+                            <td width="40%">Повозка :</td>
+                            <td width="40%">${request.roadEquipment.carriageRequired}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Комлект луков и стрел :</td>
+                            <td width="40%">${request.roadEquipment.numOfHorses}</td>
+                        </tr>
+                    </c:if>
                 </table>
                 <iframe src="https://maps.google.com/maps?q=${request.requestInfo.possibleLongitude},
                 ${request.requestInfo.possibleLatitude}&hl=es;z=14&amp;output=embed"

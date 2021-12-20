@@ -12,4 +12,5 @@ public interface UserService {
     Set<Executor> findExecutorsByBusy();
     Set<User> findUserByRole(UserRole role);
     void saveUser(User user);
+    void countRating(Executor executor, int requestRating);
 }

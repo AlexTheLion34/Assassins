@@ -32,6 +32,8 @@ public class RequestInfo {
 
     private Integer price;
 
+    private Integer rating;
+
     @Enumerated(EnumType.ORDINAL)
     private RequestDifficulty difficulty;
 
