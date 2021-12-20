@@ -13,6 +13,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class RequestRoadEquipment {
 
+    // TODO: - add fields like povozka, num of horses
+
     @Id
     private long id;
 

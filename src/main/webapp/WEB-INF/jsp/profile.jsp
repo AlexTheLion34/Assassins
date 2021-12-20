@@ -117,7 +117,7 @@
                                    href="/change-request?id=${t.id}">Редактировать</a>
                             </td>
                             <td><a type="button" class="btn btn-success"
-                                   href="/view-request?id=${t.id}">Подтвердить</a>
+                                   href="/confirm-request?requestId=${t.id}&role=${user.getRole()}">Подтвердить</a>
                             </td>
                         </tr>
                     </c:forEach>

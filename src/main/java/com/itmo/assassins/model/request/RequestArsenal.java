@@ -14,6 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class RequestArsenal {
 
+    // TODO: - add fields like num swords, archers, knives, shields
+
     @Id
     private long id;
 

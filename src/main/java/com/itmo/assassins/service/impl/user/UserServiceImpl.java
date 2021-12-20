@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserById(Long id) {
+        return userRepository.getById(id);
+    }
+
+    @Override
     public Set<Executor> findExecutorsByBusy() {
         return userRepository.findByRole(UserRole.EXECUTOR)
                 .stream()
@@ -38,5 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<User> findUserByRole(UserRole role) {
         return userRepository.findByRole(role);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 }

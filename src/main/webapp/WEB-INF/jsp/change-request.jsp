@@ -26,16 +26,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${requestTeam}" var="r">
-                        <tr>
-                            <td>${r.username}</td>
-                            <td>${r.role}</td>
-                            <td>${r.userInfo.rating}</td>
-                            <td><a type="button" class="btn btn-danger"
-                                   href="/change-team?requestId=${id}&role=${r.role}">Изменить</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                    <tr>
+                        <td>${executor.username}</td>
+                        <td>${executor.role}</td>
+                        <td>${executor.rating}</td>
+                        <td><a type="button" class="btn btn-danger"
+                               href="/change-team?requestId=${id}&role=${executor.role}">Изменить</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>${gunsmith.username}</td>
+                        <td>${gunsmith.role}</td>
+                        <td></td>
+                        <td><a type="button" class="btn btn-danger"
+                               href="/change-team?requestId=${id}&role=${gunsmith.role}">Изменить</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>${cabman.username}</td>
+                        <td>${cabman.role}</td>
+                        <td></td>
+                        <td><a type="button" class="btn btn-danger"
+                               href="/change-team?requestId=${id}&role=${cabman.role}">Изменить</a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

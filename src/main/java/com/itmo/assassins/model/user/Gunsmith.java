@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Gunsmith extends User{
+public class Gunsmith extends User {
 
     @OneToMany(mappedBy = "gunsmith")
     private List<Request> requests;

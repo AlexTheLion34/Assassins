@@ -14,7 +14,7 @@
     <div class="panel panel-primary">
         <c:if test="${user.getRole().name() eq 'MASTER_ASSASSIN'}">
             <div class="panel-heading">
-                <h3>${id}</h3>
+                <h3>${title}</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-striped">
@@ -30,11 +30,11 @@
                         <tr>
                             <td>${r.username}</td>
                             <c:if test="${r.role eq 'EXECUTOR'}">
-                                <td>${r.userInfo.rating}</td>
+                                <td>${r.rating}</td>
                             </c:if>
                             <td>
-                                <form:form method="post" action="/change-team?requestId=${id}&role=${r.role}">
-                                    <a type="submit" class="btn btn-primary">Выбрать</a>
+                                <form:form method="post" action="/change-team?requestId=${id}&userToChangeId=${r.getId()}">
+                                    <button type="submit" class="btn btn-primary button">Выбрать</button>
                                 </form:form>
                             </td>
                         </tr>
