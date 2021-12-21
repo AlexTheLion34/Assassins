@@ -4,6 +4,9 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 
 <div class="container">
+    <a class="btn btn-info" href="/change-request?id=${id}" role="button">Назад</a>
+    <br>
+    <br/>
     <table>
         <tr>
             <td width="40%">Имя пользователя :</td>

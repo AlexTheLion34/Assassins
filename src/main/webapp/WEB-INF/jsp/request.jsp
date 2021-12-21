@@ -2,6 +2,9 @@
 <%@ include file="common/navigation.jspf"%>
 <%@ page contentType="text/html;charset=utf-8" %>
 <div class="container">
+	<a class="btn btn-info" href="/profile" role="button">Назад</a>
+	<br>
+	<br/>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 ">
 			<div class="panel panel-primary">
