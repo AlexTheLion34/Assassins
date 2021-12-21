@@ -4,7 +4,7 @@
 <div class="container">
     <div>
         <span class="img-container">
-            <img src="https://i.playground.ru/p/oRX7OSiX50FK2ZlJiVAjdg.png?680-auto" alt="">
+            <img src="Assassins-main.png"/>
         </span>
     </div>
 </div>
