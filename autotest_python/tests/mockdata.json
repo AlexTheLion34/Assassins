@@ -1,0 +1,66 @@
+{
+  "valid": {
+    "create_request": [
+      {
+        "type": 1,
+        "aim": "test_1",
+        "price": 132,
+        "possibleLongitude": 132,
+        "possibleLatitude": 132,
+        "description": "test_description"
+      },
+      {
+        "type": 2,
+        "aim": "test_2",
+        "price": 132,
+        "possibleLongitude": 1,
+        "possibleLatitude": 2,
+        "description": "test_description 2"
+      },
+      {
+        "type": 2,
+        "aim": "test_3",
+        "price": 132,
+        "possibleLongitude": 1,
+        "possibleLatitude": 2,
+        "description": "test_description 3"
+      }
+    ]
+  },
+  "invalid": {
+    "create_request": [
+      {
+        "type": 2,
+        "aim": "test_3",
+        "price": "sdf",
+        "possibleLongitude": 1,
+        "possibleLatitude": 2,
+        "description": "test_description 3"
+      },
+      {
+        "type": 2,
+        "aim": "test_3",
+        "price": 1,
+        "possibleLongitude": "sdf",
+        "possibleLatitude": 2,
+        "description": "test_description 3"
+      },
+      {
+        "type": 2,
+        "aim": "test_3",
+        "price": 1,
+        "possibleLongitude": 2,
+        "possibleLatitude": "sdf",
+        "description": "test_description 3"
+      },
+      {
+        "type": 2,
+        "aim": "",
+        "price": 1,
+        "possibleLongitude": 2,
+        "possibleLatitude": 123,
+        "description": "test_description 3"
+      }
+    ]
+  }
+}

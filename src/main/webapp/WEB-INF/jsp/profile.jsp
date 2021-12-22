@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 
 <div class="container">
-    <table>
+    <table id="user_info">
         <tr>
             <td width="40%">Имя пользователя :</td>
             <td width="40%">${user.username}</td>
@@ -24,7 +24,7 @@
     </table>
     <c:if test="${user.getRole().name() eq 'CUSTOMER'}">
         <div>
-            <a type="button" class="btn btn-primary btn-md" href="/add-request">Новый заказ</a>
+            <a type="button" id="add_request" class="btn btn-primary btn-md" href="/add-request">Новый заказ</a>
         </div>
     </c:if>
     <br>
