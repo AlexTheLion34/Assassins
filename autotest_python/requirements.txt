@@ -1,0 +1,5 @@
+parameterized~=0.8
+psycopg2~=2.9
+pytest~=6.2
+selenium~=4.1
+python-dotenv~=0.19
