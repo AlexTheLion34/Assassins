@@ -35,10 +35,7 @@ public class EquipRequestController {
 
         Optional<Request> request = requestService.getRequestById(Long.parseLong(requestId));
 
-        request.ifPresent(req -> {
-
-            requestService.addArsenal(req, arsenal);
-        });
+        request.ifPresent(req -> requestService.addArsenal(req, arsenal));
 
         return "redirect:/profile";
     }
@@ -55,10 +52,7 @@ public class EquipRequestController {
 
         Optional<Request> request = requestService.getRequestById(Long.parseLong(requestId));
 
-        request.ifPresent(req -> {
-
-            requestService.addRoadEquipment(req, equipment);
-        });
+        request.ifPresent(req -> requestService.addRoadEquipment(req, equipment));
 
         return "redirect:/profile";
     }

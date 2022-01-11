@@ -85,7 +85,7 @@ public class ReportController {
             reportService.createReport(file, executor);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            return "redirect:/file-error";
         }
 
         return "redirect:/profile";

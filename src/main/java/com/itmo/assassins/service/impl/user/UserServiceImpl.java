@@ -1,5 +1,7 @@
 package com.itmo.assassins.service.impl.user;
 
+import com.itmo.assassins.model.request.RequestStatus;
+import com.itmo.assassins.model.user.Customer;
 import com.itmo.assassins.model.user.Executor;
 import com.itmo.assassins.model.user.UserRole;
 import com.itmo.assassins.model.user.User;
@@ -55,5 +57,14 @@ public class UserServiceImpl implements UserService {
         executor.setRating((executor.getRating() + requestRating) / (executor.getNumOfCompletedRequests() + 1));
         executor.setNumOfCompletedRequests(executor.getNumOfCompletedRequests() + 1);
         saveUser(executor);
+    }
+
+    @Override
+    public Long countMaxAffordablePrice(Customer customer) {
+        return (long) (customer.getBalance() - customer.getRequests()
+                .stream()
+                .filter(r -> r.getRequestInfo().getStatus() != RequestStatus.DONE)
+                .map(r -> r.getRequestInfo().getPrice())
+                .reduce(0, Integer::sum));
     }
 }

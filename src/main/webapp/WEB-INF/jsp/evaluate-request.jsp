@@ -15,11 +15,22 @@
                         <fieldset class="form-group">
                             <form:label path="requestInfo.rating">Оценка выполнения заказа</form:label>
                             <form:input path="requestInfo.rating" type="number" class="form-control"
-                                        required="requestInfo.rating" step="1" min="1" max="5"/>
-                            <form:errors path="requestInfo.rating" cssClass="text-warning"/>
+                                        required="required"
+                                        step="1"
+                                        min="1"
+                                        max="5"
+                                        oninvalid="this.setCustomValidity('Выставьте оценку')"
+                                        oninput="this.setCustomValidity('')"
+                                        onkeyup="digitsOnly(this)"/>
                         </fieldset>
                         <button type="submit" class="btn btn-success">Оценить</button>
                     </form:form>
+                    <script>
+                        function digitsOnly(input) {
+                            const regex = /[^1-5]/gi;
+                            input.value = input.value.replace(regex, "");
+                        }
+                    </script>
                 </div>
             </div>
         </div>

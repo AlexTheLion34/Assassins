@@ -83,15 +83,13 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void confirmRequest(Request request, User user) {
+    public void confirmRequest(Request request, Master master) {
 
-        if (user.getRole() == UserRole.MASTER_ASSASSIN) {
-            List<Request> masterRequests = ((Master) user).getRequests();
+            List<Request> masterRequests = master.getRequests();
             masterRequests.remove(request);
-            ((Master) user).setRequests(masterRequests);
+            master.setRequests(masterRequests);
             request.getRequestInfo().setStatus(RequestStatus.PACKING_1);
             request.setMaster(null);
-        }
 
         saveRequest(request);
     }

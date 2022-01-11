@@ -3,6 +3,7 @@ package com.itmo.assassins.service.impl.user;
 import com.itmo.assassins.model.request.RequestDifficulty;
 import com.itmo.assassins.model.user.*;
 import com.itmo.assassins.service.user.UserService;
+import com.itmo.assassins.service.user.UserTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,12 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
-public class UserTeamService implements com.itmo.assassins.service.user.UserTeamService {
+public class UserTeamServiceImpl implements UserTeamService {
 
     private final UserService userService;
 
     @Autowired
-    public UserTeamService(UserService userService) {
+    public UserTeamServiceImpl(UserService userService) {
         this.userService = userService;
     }
 

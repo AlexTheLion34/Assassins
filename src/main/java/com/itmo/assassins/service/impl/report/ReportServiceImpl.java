@@ -41,7 +41,7 @@ public class ReportServiceImpl implements ReportService {
 
         byte[] bytes = file.getBytes();
 
-        Path path = Paths.get("storage/" + file.getOriginalFilename());
+        Path path = Paths.get("storage/" + executor.getCurrentTask().getId() + "-" + file.getOriginalFilename());
         Files.write(path, bytes);
 
         Request request = executor.getCurrentTask();

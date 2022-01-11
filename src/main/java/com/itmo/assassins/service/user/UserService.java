@@ -1,5 +1,6 @@
 package com.itmo.assassins.service.user;
 
+import com.itmo.assassins.model.user.Customer;
 import com.itmo.assassins.model.user.Executor;
 import com.itmo.assassins.model.user.User;
 import com.itmo.assassins.model.user.UserRole;
@@ -13,4 +14,5 @@ public interface UserService {
     Set<User> findUserByRole(UserRole role);
     void saveUser(User user);
     void countRating(Executor executor, int requestRating);
+    Long countMaxAffordablePrice(Customer customer);
 }

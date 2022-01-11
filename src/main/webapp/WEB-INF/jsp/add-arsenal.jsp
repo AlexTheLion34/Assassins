@@ -15,29 +15,43 @@
                         <fieldset class="form-group">
                             <form:label path="numOfSwords">Мечи</form:label>
                             <form:input path="numOfSwords" type="number" class="form-control"
-                                        required="required" step="1" min="0"/>
-                            <form:errors path="numOfSwords" cssClass="text-warning"/>
+                                        required="required" step="1" min="0"
+                                        oninvalid="this.setCustomValidity('Введите количество')"
+                                        oninput="this.setCustomValidity('')"
+                                        onkeyup="digitsOnly(this)"/>
                         </fieldset>
                         <fieldset class="form-group">
                             <form:label path="numOfKnives">Ножи</form:label>
                             <form:input path="numOfKnives" type="number" class="form-control"
-                                        required="required" step="1" min="0"/>
-                            <form:errors path="numOfKnives" cssClass="text-warning"/>
+                                        required="required" step="1" min="0"
+                                        oninvalid="this.setCustomValidity('Введите количество')"
+                                        oninput="this.setCustomValidity('')"
+                                        onkeyup="digitsOnly(this)"/>
                         </fieldset>
                         <fieldset class="form-group">
                             <form:label path="numOfBows">Комплект луков со стрелами</form:label>
                             <form:input path="numOfBows" type="number" class="form-control"
-                                        required="required" step="1" min="0"/>
-                            <form:errors path="numOfBows" cssClass="text-warning"/>
+                                        required="required" step="1" min="0"
+                                        oninvalid="this.setCustomValidity('Введите количество')"
+                                        oninput="this.setCustomValidity('')"
+                                        onkeyup="digitsOnly(this)"/>
                         </fieldset>
                         <fieldset class="form-group">
                             <form:label path="numOfShields">Щиты</form:label>
                             <form:input path="numOfShields" type="number" class="form-control"
-                                        required="required" step="1" min="0"/>
-                            <form:errors path="numOfShields" cssClass="text-warning"/>
+                                        required="required" step="1" min="0"
+                                        oninvalid="this.setCustomValidity('Введите количество')"
+                                        oninput="this.setCustomValidity('')"
+                                        onkeyup="digitsOnly(this)"/>
                         </fieldset>
                         <button type="submit" class="btn btn-success">Добавить</button>
                     </form:form>
+                    <script>
+                        function digitsOnly(input) {
+                            const regex = /[^1-9]/gi;
+                            input.value = input.value.replace(regex, "");
+                        }
+                    </script>
                 </div>
             </div>
         </div>

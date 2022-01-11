@@ -72,8 +72,8 @@
                 </table>
                 <iframe src="https://maps.google.com/maps?q=${request.requestInfo.possibleLongitude},
                 ${request.requestInfo.possibleLatitude}&hl=es;z=14&amp;output=embed"
-                        width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                <c:if test="${user.getRole().name() eq 'EXECUTOR'}">
+                        width="550" height="450" style="display:block;width:100%;" allowfullscreen="" loading="lazy"></iframe>
+                <c:if test="${user.getRole().name() eq 'EXECUTOR' and request.requestInfo.status.name() eq 'EXECUTING'}">
                     <div>
                         <a type="button" class="btn btn-primary btn-md" href="/add-report">Добавить отчет</a>
                     </div>

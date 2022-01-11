@@ -14,17 +14,29 @@
                         <form:hidden path="id" />
                         <fieldset class="form-group">
                             <form:label path="carriageRequired">Повозка</form:label>
-                            Нужна <form:radiobutton required="required" path="carriageRequired" value="true"/>
-                            Не нужна <form:radiobutton required="required" path="carriageRequired" value="false"/>
+                            <br>
+                            <form:select path="carriageRequired">
+                                <form:option value="true">Требуется</form:option>
+                                <form:option value="false">Не требуется</form:option>
+                            </form:select>
                         </fieldset>
                         <fieldset class="form-group">
                             <form:label path="numOfHorses">Лошади</form:label>
                             <form:input path="numOfHorses" type="number" class="form-control"
-                                        required="required" step="1" min="0"/>
-                            <form:errors path="numOfHorses" cssClass="text-warning"/>
+                                        required="required" step="1" min="0"
+                                        oninvalid="this.setCustomValidity('Введите количество')"
+                                        oninput="this.setCustomValidity('')"
+                                        onkeyup="digitsOnly(this)"
+                            />
                         </fieldset>
                         <button type="submit" class="btn btn-success">Добавить</button>
                     </form:form>
+                    <script>
+                        function digitsOnly(input) {
+                            const regex = /[^1-9]/gi;
+                            input.value = input.value.replace(regex, "");
+                        }
+                    </script>
                 </div>
             </div>
         </div>

@@ -2,7 +2,6 @@ package com.itmo.assassins.controller.request;
 
 import com.itmo.assassins.model.request.Request;
 import com.itmo.assassins.model.request.RequestInfo;
-import com.itmo.assassins.model.request.RequestStatus;
 import com.itmo.assassins.model.user.*;
 import com.itmo.assassins.service.request.RequestDifficultyComputationService;
 import com.itmo.assassins.service.request.RequestService;
@@ -11,7 +10,6 @@ import com.itmo.assassins.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,7 +43,10 @@ public class RequestController {
     @RequestMapping(value = "/add-request", method = RequestMethod.GET)
     public String addRequest(ModelMap model) {
 
+        User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
+
         model.addAttribute("requestInfo", new RequestInfo());
+        model.addAttribute("maxPrice", userService.countMaxAffordablePrice((Customer) currentUser));
 
         return "request";
     }
@@ -54,13 +55,6 @@ public class RequestController {
     public String addRequest(RequestInfo requestInfo) {
 
         User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
-
-        if (requestInfo.getPrice() + ((Customer) currentUser).getRequests()
-                .stream()
-                .map(r -> r.getRequestInfo().getPrice())
-                .reduce(0, Integer::sum) > ((Customer) currentUser).getBalance()) {
-            return "price-error";
-        }
 
         requestInfo.setDifficulty(difficultyComputationService.computeDifficulty(requestInfo));
 
@@ -95,14 +89,12 @@ public class RequestController {
         request.ifPresent(req -> {
 
             User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
+
             model.put("user", currentUser);
             model.put("id", id);
-
-            if (currentUser.getRole() == UserRole.MASTER_ASSASSIN) {
-                model.put("executor", req.getExecutor());
-                model.put("cabman", req.getCabman());
-                model.put("gunsmith", req.getGunsmith());
-            }
+            model.put("executor", req.getExecutor());
+            model.put("cabman", req.getCabman());
+            model.put("gunsmith", req.getGunsmith());
         });
 
         return "change-request";
@@ -115,13 +107,13 @@ public class RequestController {
 
         User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
 
-        request.ifPresent(req -> requestService.confirmRequest(req, currentUser));
+        request.ifPresent(req -> requestService.confirmRequest(req, (Master) currentUser));
 
         return "redirect:/profile";
     }
 
     @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
-    public String putRatingForOrder(ModelMap model, @RequestParam String id) {
+    public String putRatingForRequest(ModelMap model, @RequestParam String id) {
 
         Optional<Request> request = requestService.getRequestById(Long.parseLong(id));
 
@@ -131,7 +123,7 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/evaluate", method = RequestMethod.POST)
-    public String putRatingForOrder(Request request, @RequestParam String requestId) {
+    public String putRatingForRequest(Request request, @RequestParam String requestId) {
 
         Optional<Request> requestFromRepo = requestService.getRequestById(Long.parseLong(requestId));
 
