@@ -71,7 +71,7 @@
     </div>
     <script>
         function lettersOnly(input) {
-            const regex = /[^?!,.а-яА-ЯёЁ0-9\s]+$/gi;
+            const regex = /[^?!,.а-яА-ЯёЁa-zA-Z0-9\s]+$/gi;
             input.value = input.value.replace(regex, "");
         }
 

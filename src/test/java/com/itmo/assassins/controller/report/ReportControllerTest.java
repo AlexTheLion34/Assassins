@@ -1,7 +1,6 @@
 package com.itmo.assassins.controller.report;
 
 import com.itmo.assassins.model.report.Report;
-import com.itmo.assassins.model.request.RequestArsenal;
 import com.itmo.assassins.service.impl.user.UserServiceImpl;
 import com.itmo.assassins.service.report.ReportService;
 import com.itmo.assassins.service.user.UserSecurityService;
