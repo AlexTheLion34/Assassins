@@ -15,8 +15,7 @@ class TestUI(BaseTestCase):
         nav_ul = self.driver.find_element_by_tag_name('ul')
 
         nav_li_a = nav_ul.find_elements_by_tag_name('li>a')
-        assert nav_li_a[0].text == 'Профиль'
-        assert nav_li_a[1].text == 'Выйти'
+        assert nav_li_a[0].text == 'Войти'
 
     def test_main_page_after_sign_in_customer(self):
         self.sign_in_site()

@@ -11,8 +11,7 @@ class TestUI(BaseTestCase):
         self.driver.find_element_by_id('add_request').click()
         assert self.driver.current_url == self.host + 'add-request'
 
-        type1 = self.driver.find_element_by_id('type1')
-        type2 = self.driver.find_element_by_id('type2')
+        type_elm = self.driver.find_element_by_id('type')
         aim = self.driver.find_element_by_id('aim')
         price = self.driver.find_element_by_id('price')
         possible_longitude = self.driver.find_element_by_id('possibleLongitude')
@@ -20,8 +19,7 @@ class TestUI(BaseTestCase):
         description = self.driver.find_element_by_id('description')
         btn_create = self.driver.find_element_by_tag_name('button')
 
-        assert type1.get_attribute("type") == 'radio'
-        assert type2.get_attribute("type") == 'radio'
+        assert type_elm.get_attribute("type") == 'select-one'
         assert aim.get_attribute("type") == 'text'
         assert description.get_attribute("type") == 'text'
         assert price.get_attribute("type") == 'number'
@@ -29,8 +27,9 @@ class TestUI(BaseTestCase):
         assert possible_longitude.get_attribute("type") == 'number'
         assert possible_latitude.get_attribute("type") == 'number'
 
-        assert type1.get_attribute("value") == 'Артефакт'
-        assert type2.get_attribute("value") == 'Заказное  убийство'
+        elm_select = type_elm.find_elements_by_tag_name('option')
+        assert elm_select[0].get_attribute("value") == 'Артефакт'
+        assert elm_select[1].get_attribute("value") == 'Заказное убийство'
         assert btn_create.text == 'Создать'
 
         labels = self.driver.find_elements_by_tag_name('label')
