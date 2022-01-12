@@ -2,6 +2,9 @@ from parameterized import parameterized, parameterized_class
 
 import pytest
 import time
+
+from selenium.webdriver.support.select import Select
+
 from tests.BaseTestCase import BaseTestCase
 from tests.mockdata import get_mock_data, get_tuple_data
 
@@ -20,10 +23,11 @@ class TestCreateRequest(BaseTestCase):
         self.sign_in_site('Napoleon')
         self.driver.get(self.host + 'add-request')
 
+        type_select = self.driver.find_element_by_id('type')
         if data[0] == 1:
-            self.driver.find_element_by_id('type1').click()
+            Select(type_select).select_by_value('Артефакт')
         else:
-            self.driver.find_element_by_id('type2').click()
+            Select(type_select).select_by_value('Заказное убийство')
 
         self.add_data_form(list_id_element, list(data)[1:])
         self.driver.find_element_by_class_name('btn').click()
@@ -36,10 +40,11 @@ class TestCreateRequest(BaseTestCase):
         self.sign_in_site('Napoleon')
         self.driver.get(self.host + 'add-request')
 
+        type_select = self.driver.find_element_by_id('type')
         if data[0] == 1:
-            self.driver.find_element_by_id('type1').click()
+            Select(type_select).select_by_value('Артефакт')
         else:
-            self.driver.find_element_by_id('type2').click()
+            Select(type_select).select_by_value('Заказное убийство')
 
         self.add_data_form(list_id_element, list(data)[1:])
         self.driver.find_element_by_class_name('btn').click()

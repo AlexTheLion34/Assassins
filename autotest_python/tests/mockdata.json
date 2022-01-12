@@ -25,7 +25,308 @@
         "possibleLatitude": 2,
         "description": "test_description 3"
       }
-    ]
+    ],
+    "db": {
+      "request": [
+        {
+          "id":  1001,
+          "executor_id": 2,
+          "owner_id": 1
+        },
+        {
+          "id":  1002,
+          "executor_id": 3,
+          "owner_id": 1
+        },
+        {
+          "id":  1003,
+          "executor_id": 4,
+          "owner_id": 1
+        },
+        {
+          "id":  1004,
+          "executor_id": 5,
+          "owner_id": 1
+        },
+        {
+          "id":  1005,
+          "executor_id": 6,
+          "owner_id": 1
+        }
+      ],
+      "request_info": [
+        {
+          "aim": "Test aim",
+          "description": "test description",
+          "difficulty": 0.3,
+          "possible_latitude": 13,
+          "possible_longitude": 123,
+          "price": 45,
+          "rating": 4.5,
+          "status": "EXECUTING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 2",
+          "description": "test description 2",
+          "difficulty": 0.5,
+          "possible_latitude": 123,
+          "possible_longitude": 23,
+          "price": 42,
+          "rating": 2.5,
+          "status": "MODERATING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 3",
+          "description": "test description3",
+          "difficulty": 0.3,
+          "possible_latitude": 13,
+          "possible_longitude": 123,
+          "price": 45,
+          "rating": 4.5,
+          "status": "PACKING_1",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 4",
+          "description": "test description 5",
+          "difficulty": 0.5,
+          "possible_latitude": 123,
+          "possible_longitude": 23,
+          "price": 42,
+          "rating": 2.5,
+          "status": "PACKING_2",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 6",
+          "description": "test description 6",
+          "difficulty": 0.3,
+          "possible_latitude": 131,
+          "possible_longitude": 123,
+          "price": 2,
+          "rating": 4.5,
+          "status": "CONFIRMING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 7",
+          "description": "test description 8",
+          "difficulty": 0.15,
+          "possible_latitude": 13,
+          "possible_longitude": 323,
+          "price": 42,
+          "rating": 2.5,
+          "status": "EVALUATING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 9",
+          "description": "test description 9",
+          "difficulty": 0.5,
+          "possible_latitude": 123,
+          "possible_longitude": 23,
+          "price": 42,
+          "rating": 2.5,
+          "status": "PAYMENT_CONFIRMING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 10",
+          "description": "test description 10",
+          "difficulty": 0.5,
+          "possible_latitude": 123,
+          "possible_longitude": 23,
+          "price": 42,
+          "rating": 2.5,
+          "status": "DONE",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim 11",
+          "description": "test description 11",
+          "difficulty": 0.5,
+          "possible_latitude": 123,
+          "possible_longitude": 23,
+          "price": 422,
+          "rating": 2.5,
+          "status": "DONE",
+          "type": "Заказное убийство",
+          "request_id": 10000
+        }
+      ],
+      "request_arsenal": [
+        {
+          "num_of_bows": 12,
+          "num_of_knives": 45,
+          "num_of_shields": 6,
+          "num_of_swords": 4,
+          "request_id": 10000
+        },
+        {
+          "num_of_bows": 123,
+          "num_of_knives": 425,
+          "num_of_shields": 16,
+          "num_of_swords": 412,
+          "request_id": 10000
+        },
+        {
+          "num_of_bows": 132,
+          "num_of_knives": 445,
+          "num_of_shields": 56,
+          "num_of_swords": 64,
+          "request_id": 10000
+        }
+      ],
+      "report": [
+        {
+          "path": "C:\\Desctop",
+          "request_id": 10000
+        },
+        {
+          "path": "D:\\Desctop",
+          "request_id": 10000
+        }
+      ],
+      "request_road_equipment": [
+        {
+          "carriage_required": false,
+          "num_of_horses": 12,
+          "request_id": 10000
+        },
+        {
+          "carriage_required": true,
+          "num_of_horses": 5,
+          "request_id": 10000
+        }
+      ],
+      "request_team": [
+        {
+          "request_id": 10000,
+          "cabman_id": 11,
+          "executor_id": 6,
+          "gunsmith_id": 9,
+          "master_id": 7
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": 12,
+          "executor_id": 3,
+          "gunsmith_id": 10,
+          "master_id": 8
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": 11,
+          "executor_id": 4,
+          "gunsmith_id": 9,
+          "master_id": 7
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": 12,
+          "executor_id": 5,
+          "gunsmith_id": 10,
+          "master_id": 8
+        }
+      ],
+      "assassins_user": [
+        {
+          "id": 100,
+          "password": "$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S",
+          "role": "CUSTOMER",
+          "username": "Napoleon"
+        },
+        {
+          "id": 101,
+          "password": "$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S",
+          "role": "EXECUTOR",
+          "username": "Altair"
+        },
+        {
+          "id": 102,
+          "password": "$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S",
+          "role": "MASTER_ASSASSIN",
+          "username": "Master2"
+        },
+        {
+          "id": 103,
+          "password": "$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S",
+          "role": "Gunsmith",
+          "username": "Gunsmith1"
+        },
+        {
+          "id": 104,
+          "password": "$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S",
+          "role": "Cabman",
+          "username": "Cabman1"
+        }
+      ],
+      "cabman": [
+        {
+          "id": 109
+        }
+      ],
+      "customer": [
+        {
+          "balance": 109,
+          "id": 105
+        },
+        {
+          "balance": 10900,
+          "id": 105
+        }
+      ],
+      "executor": [
+        {
+          "balance": 109,
+          "busy": true,
+          "num_of_completed_requests": 5,
+          "rating": 5,
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": false,
+          "num_of_completed_requests": 5,
+          "rating": 5,
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": false,
+          "num_of_completed_requests": 104,
+          "rating": 5,
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": false,
+          "num_of_completed_requests": 104,
+          "rating": 2.5,
+          "id": 106
+        }
+      ],
+      "gunsmith": [
+        {
+          "id": 108
+        }
+      ],
+      "master": [
+        {
+          "id": 107
+        }
+      ]
+    }
   },
   "invalid": {
     "create_request": [
@@ -61,6 +362,270 @@
         "possibleLatitude": 123,
         "description": "test_description 3"
       }
-    ]
+    ],
+    "db": {
+      "request":[
+        {
+          "id":  "sd",
+          "executor_id": 2,
+          "owner_id": 1
+        },
+        {
+          "id":  1001,
+          "executor_id": "sd",
+          "owner_id": 1
+        },
+        {
+          "id":  1001,
+          "executor_id": 2,
+          "owner_id": "sd"
+        },
+        {
+          "id":  1001,
+          "executor_id": "sd",
+          "owner_id": "sd"
+        },
+        {
+          "id":  "1001",
+          "executor_id": "2s",
+          "owner_id": "1s"
+        }
+      ],
+      "request_info": [
+        {
+          "aim": "Test aim",
+          "description": "test description",
+          "difficulty": "sd",
+          "possible_latitude": 13,
+          "possible_longitude": 123,
+          "price": 45,
+          "rating": 4.5,
+          "status": "EXECUTING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim",
+          "description": "test description",
+          "difficulty": 0.3,
+          "possible_latitude": "as",
+          "possible_longitude": 123,
+          "price": 45,
+          "rating": 4.5,
+          "status": "EXECUTING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim",
+          "description": "test description",
+          "difficulty": 0.3,
+          "possible_latitude": 12,
+          "possible_longitude": "b123",
+          "price": 45,
+          "rating": 4.5,
+          "status": "EXECUTING",
+          "type": "Артефакт",
+          "request_id": 10000
+        },
+        {
+          "aim": "Test aim",
+          "description": "test description",
+          "difficulty": 0.3,
+          "possible_latitude": 12,
+          "possible_longitude": 123,
+          "price": "4d5",
+          "rating": 4.5,
+          "status": "EXECUTING",
+          "type": "Артефакт",
+          "request_id": 10000
+        }
+      ],
+      "request_arsenal": [
+        {
+          "num_of_bows": "as",
+          "num_of_knives": 45,
+          "num_of_shields": 6,
+          "num_of_swords": 4,
+          "request_id": 10000
+        },
+        {
+          "num_of_bows": 1,
+          "num_of_knives": "asd",
+          "num_of_shields": 6,
+          "num_of_swords": 4,
+          "request_id": 10000
+        },
+        {
+          "num_of_bows": 1,
+          "num_of_knives": 45,
+          "num_of_shields": "s",
+          "num_of_swords": 4,
+          "request_id": 10000
+        },
+        {
+          "num_of_bows": 1,
+          "num_of_knives": 45,
+          "num_of_shields": 6,
+          "num_of_swords": "sd",
+          "request_id": 10000
+        },
+        {
+          "num_of_bows": 1,
+          "num_of_knives": 45,
+          "num_of_shields": 6,
+          "num_of_swords": 4,
+          "request_id": "dsd"
+        }
+      ],
+      "report": [
+        {
+          "path": 1,
+          "request_id": 1000.20
+        },
+        {
+          "path": "1",
+          "request_id": "10000d"
+        }
+      ],
+      "request_road_equipment":[
+        {
+          "carriage_required": "falsea",
+          "num_of_horses": 12,
+          "request_id": 10000
+        },
+        {
+          "carriage_required": false,
+          "num_of_horses": 12,
+          "request_id": 1000.05
+        },
+        {
+          "carriage_required": false,
+          "num_of_horses": 123.5,
+          "request_id": 1000
+        },
+        {
+          "carriage_required": true,
+          "num_of_horses": "5sd",
+          "request_id": 10000
+        }
+      ],
+      "request_team": [
+        {
+          "request_id": "10000s",
+          "cabman_id": 11,
+          "executor_id": 6,
+          "gunsmith_id": 9,
+          "master_id": 7
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": "11d",
+          "executor_id": 6,
+          "gunsmith_id": 9,
+          "master_id": 7
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": 11,
+          "executor_id": "6s",
+          "gunsmith_id": 9,
+          "master_id": 7
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": 11,
+          "executor_id": 6,
+          "gunsmith_id": "9sd",
+          "master_id": 7
+        },
+        {
+          "request_id": 10000,
+          "cabman_id": 11,
+          "executor_id": 6,
+          "gunsmith_id": 9,
+          "master_id": "7s"
+        }
+      ],
+      "assassins_user": [
+        {
+          "id": "100sd",
+          "password": "$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S",
+          "role": "CUSTOMER",
+          "username": "Napoleon"
+        }
+      ],
+      "cabman": [
+        {
+          "id": "109d"
+        },
+        {
+          "id": 109.5
+        }
+      ],
+      "customer": [
+        {
+          "balance": "109kj",
+          "id": 105
+        },
+        {
+          "balance": 10900,
+          "id": 1055156
+        }
+      ],
+      "executor": [
+        {
+          "balance": "109sd",
+          "busy": true,
+          "num_of_completed_requests": 5,
+          "rating": 5,
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": "truedf",
+          "num_of_completed_requests": 5,
+          "rating": 5,
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": true,
+          "num_of_completed_requests": "sd",
+          "rating": 5,
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": true,
+          "num_of_completed_requests": 5,
+          "rating": "dd",
+          "id": 106
+        },
+        {
+          "balance": 109,
+          "busy": true,
+          "num_of_completed_requests": 5,
+          "rating": 2,
+          "id": "dsd"
+        }
+      ],
+      "gunsmith": [
+        {
+          "id": 4545454
+        },
+        {
+          "id": "4545454sd"
+        }
+      ],
+      "master": [
+        {
+          "id": 4545454
+        },
+        {
+          "id": "4545454sd"
+        }
+      ]
+    }
   }
 }

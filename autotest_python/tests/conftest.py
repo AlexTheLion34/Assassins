@@ -64,10 +64,7 @@ def check_data_in_db(connect_db, query):
 @pytest.fixture
 def create_request(connect_db):
     query = 'insert into request (id, executor_id, owner_id) values(10000, 6, 1);'
-    query_select = 'select * from request where id=10000;'
-
-    if check_data_in_db(connect_db, query_select):
-        connect_db.execute(query)
+    connect_db.execute(query)
     yield
     query_del = "DELETE FROM request WHERE id = 10000"
     connect_db.execute(query_del)
@@ -89,3 +86,46 @@ def create_request_info(create_request, connect_db):
     connect_db.execute(query_del)
 
 
+@pytest.fixture
+def customer(connect_db):
+    query = "insert into assassins_user (id,password,role,username) values(105,'$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S','CUSTOMER','Napoleon') RETURNING id;"
+    connect_db.execute(query)
+    yield
+    query_del = "DELETE FROM assassins_user WHERE id = 105"
+    connect_db.execute(query_del)
+
+
+@pytest.fixture
+def executor(connect_db):
+    query = "insert into assassins_user (id,password,role,username) values(106,'$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S','EXECUTOR','Altair') RETURNING id;"
+    connect_db.execute(query)
+    yield
+    query_del = "DELETE FROM assassins_user WHERE id = 106"
+    connect_db.execute(query_del)
+
+
+@pytest.fixture
+def master(connect_db):
+    query = "insert into assassins_user (id,password,role,username) values(107,'$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S','MASTER_ASSASSIN','Master1') RETURNING id;"
+    connect_db.execute(query)
+    yield
+    query_del = "DELETE FROM assassins_user WHERE id = 107"
+    connect_db.execute(query_del)
+
+
+@pytest.fixture
+def gunsmith(connect_db):
+    query = "insert into assassins_user (id,password,role,username) values(108,'$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S','Gunsmith','Gunsmith1') RETURNING id;"
+    connect_db.execute(query)
+    yield
+    query_del = "DELETE FROM assassins_user WHERE id = 108"
+    connect_db.execute(query_del)
+
+
+@pytest.fixture
+def cabman(connect_db):
+    query = "insert into assassins_user (id,password,role,username) values(109,'$2a$10$ud9azktwmW.81ZELDGDdt.Yipg8CgUNPFZm.3FKTLF/oieoH.Xs4S','CABMAN','Cabman1') RETURNING id;"
+    connect_db.execute(query)
+    yield
+    query_del = "DELETE FROM assassins_user WHERE id = 109"
+    connect_db.execute(query_del)
