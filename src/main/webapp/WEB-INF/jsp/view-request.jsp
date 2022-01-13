@@ -1,7 +1,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
     <a class="btn btn-info" href="/profile" role="button">Назад</a>
@@ -26,14 +26,18 @@
                     </tr>
                     <tr>
                         <td width="40%">Описание :</td>
-                        <td width="40%">${request.requestInfo.description}</td>
+                        <td width="40%">${request.requestInfo.description}
+<%--                            <div style="overflow:scroll; width:100%">--%>
+<%--                                --%>
+<%--                            </div>--%>
+                        </td>
                     </tr>
                     <tr>
                         <td width="40%">Возможная долгота :</td>
                         <td width="40%">${request.requestInfo.possibleLongitude}</td>
                     </tr>
                     <tr>
-                        <td width="40%">Возможная ширина :</td>
+                        <td width="40%">Возможная широта :</td>
                         <td width="40%">${request.requestInfo.possibleLatitude}</td>
                     </tr>
                     <c:if test="${request.arsenal != null and user.getRole().name() eq 'EXECUTOR'}">

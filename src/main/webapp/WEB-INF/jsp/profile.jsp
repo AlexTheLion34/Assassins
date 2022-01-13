@@ -1,17 +1,17 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
     <table id="user_info">
         <tr>
-            <td width="40%">Имя пользователя :</td>
-            <td width="40%">${user.username}</td>
+            <td>Имя пользователя: </td>
+            <td>${user.username}</td>
         </tr>
         <c:if test="${user.getRole().name() eq 'CUSTOMER' or user.getRole().name() eq 'EXECUTOR'}">
             <tr>
-                <td>Счет :</td>
+                <td>Счет: </td>
                 <td>${user.balance}</td>
             </tr>
         </c:if>

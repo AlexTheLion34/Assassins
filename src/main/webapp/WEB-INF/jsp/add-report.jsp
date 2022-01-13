@@ -1,6 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
     <a class="btn btn-info" href="/profile" role="button">Назад</a>
     <br>
@@ -11,7 +11,10 @@
                 <div class="panel-heading">Отчет</div>
                 <div class="panel-body">
                     <form:form method="post" action="/add-report" enctype="multipart/form-data">
-                        <p><input name="file" id="fileToUpload" type="file" required="required" accept=".pdf"/></p>
+                        <p><input name="file" id="fileToUpload" type="file" required="required"
+                                  accept=".pdf"
+                                  oninvalid="this.setCustomValidity('Прикрепите файл')"
+                                  oninput="this.setCustomValidity('')"/></p>
                         <p><input type="submit" class="btn btn-primary btn-md" value="Загрузить отчет"></p>
                     </form:form>
                     <script>

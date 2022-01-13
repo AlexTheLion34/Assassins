@@ -1,28 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <html>
-<head>
-    <div style="background: #eee">
-        <nav class="bg-dark navbar-dark container navbar navbar-expand-sm  flex-column flex-sm-row">
-            <a class="navbar-brand" href="/">Assassin's Creed</a>
-        </nav>
-    </div>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
-    <meta charset="utf-8">
-    <title>Login</title>
-
-    <style>
-        .col-centered {
-            float: none;
-            margin: 0 auto;
-        }
-    </style>
-
-</head>
 <body>
 <div class="container">
     <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 col-centered">
@@ -50,5 +33,11 @@
         </div>
     </div>
 </div>
+<style>
+    .col-centered {
+        float: none;
+        margin: 0 auto;
+    }
+</style>
 </body>
 </html>

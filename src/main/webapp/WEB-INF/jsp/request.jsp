@@ -1,6 +1,6 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
     <a class="btn btn-info" href="/profile" role="button">Назад</a>
     <br>
@@ -59,7 +59,7 @@
                         <fieldset class="form-group">
                             <form:label path="description">Описание</form:label>
                             <form:input path="description" type="text" class="form-control"
-                                        required="required" onkeyup="lettersOnly(this)" maxlength="60"
+                                        required="required" onkeyup="lettersOnly(this)" maxlength="55"
                                         oninvalid="this.setCustomValidity('Введите описание')"
                                         oninput="this.setCustomValidity('')"/>
                         </fieldset>

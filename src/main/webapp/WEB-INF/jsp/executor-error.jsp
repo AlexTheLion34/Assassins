@@ -1,7 +1,18 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
-    <div class="alert-danger">Все исполнители заняты, попробуйте позже!</div>
+    <div class="alert-danger">
+        <table id="error-info">
+            <tr>
+                <td>Код ошибки:</td>
+                <td>${pageContext.response.status}</td>
+            </tr>
+            <tr>
+                <td>Сообщение:</td>
+                <td>Все исполнители заняты, попробуйте позже</td>
+            </tr>
+        </table>
+    </div>
 </div>
