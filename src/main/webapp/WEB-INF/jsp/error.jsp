@@ -5,10 +5,6 @@
 <div class="container">
     <div class="alert-danger">
         <table id="error-info">
-            <tr>
-                <td>Код ошибки:</td>
-                <td>${pageContext.response.status}</td>
-            </tr>
             <c:if test="${pageContext.response.status eq 403}">
                 <tr>
                     <td>Сообщение:</td>

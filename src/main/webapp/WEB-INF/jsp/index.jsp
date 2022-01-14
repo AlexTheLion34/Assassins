@@ -5,7 +5,7 @@
 <div class="container">
     <div>
         <span class="img-container">
-            <img src="Assassins-main.png"/>
+            <img src="Assassins.png"/>
         </span>
     </div>
 </div>

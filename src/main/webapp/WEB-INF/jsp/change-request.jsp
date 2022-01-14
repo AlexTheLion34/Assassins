@@ -9,8 +9,8 @@
     <br/>
     <table>
         <tr>
-            <td width="40%">Имя пользователя :</td>
-            <td width="40%">${user.username}</td>
+            <td>Имя пользователя :</td>
+            <td>${user.username}</td>
         </tr>
     </table>
     <br>
@@ -20,12 +20,19 @@
                 <h3>Команда</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-striped">
-                    <thead>
+                <table class="table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col style="width: 33%;">
+                    </colgroup>
+                    <thead class="thead-light">
                     <tr>
-                        <th width="40%">Имя</th>
-                        <th width="40%">Роль</th>
-                        <th width="40%">Рейтинг</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Роль</th>
+                        <th scope="col">Рейтинг</th>
+                        <th scope="col">Действия</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,7 +40,8 @@
                         <td>${executor.username}</td>
                         <td>${executor.role.getLabel()}</td>
                         <td>${executor.rating}</td>
-                        <td><a type="button" class="btn btn-danger"
+                        <td>
+                            <a type="button" class="btn btn-danger"
                                href="/change-team?requestId=${id}&role=${executor.role}">Изменить</a>
                         </td>
                     </tr>
@@ -41,7 +49,8 @@
                         <td>${gunsmith.username}</td>
                         <td>${gunsmith.role.getLabel()}</td>
                         <td></td>
-                        <td><a type="button" class="btn btn-danger"
+                        <td>
+                            <a type="button" class="btn btn-danger"
                                href="/change-team?requestId=${id}&role=${gunsmith.role}">Изменить</a>
                         </td>
                     </tr>
@@ -49,7 +58,8 @@
                         <td>${cabman.username}</td>
                         <td>${cabman.role.getLabel()}</td>
                         <td></td>
-                        <td><a type="button" class="btn btn-danger"
+                        <td>
+                            <a type="button" class="btn btn-danger"
                                href="/change-team?requestId=${id}&role=${cabman.role}">Изменить</a>
                         </td>
                     </tr>

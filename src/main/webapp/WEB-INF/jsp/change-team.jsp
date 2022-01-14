@@ -9,8 +9,8 @@
     <br/>
     <table>
         <tr>
-            <td width="40%">Имя пользователя :</td>
-            <td width="40%">${user.username}</td>
+            <td>Имя пользователя :</td>
+            <td>${user.username}</td>
         </tr>
     </table>
     <br>
@@ -20,11 +20,18 @@
                 <h3>${title}</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-striped">
-                    <thead>
+                <table class="table">
+                    <c:if test="${title eq 'Ассассины'}">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col style="width: 33%;">
+                    </colgroup>
+                    <thead class="thead-light">
                     <tr>
-                        <th width="40%">Имя</th>
-                        <th width="40%">Рейтинг</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Рейтинг</th>
+                        <th scope="col">Действия</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,17 +39,43 @@
 
                         <tr>
                             <td>${r.username}</td>
-                            <c:if test="${r.role eq 'EXECUTOR'}">
-                                <td>${r.rating}</td>
-                            </c:if>
+                            <td>${r.rating}</td>
                             <td>
-                                <form:form method="post" action="/change-team?requestId=${id}&userToChangeId=${r.getId()}">
+                                <form:form method="post"
+                                           action="/change-team?requestId=${id}&userToChangeId=${r.getId()}">
                                     <button type="submit" class="btn btn-primary button">Выбрать</button>
                                 </form:form>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
+                    </c:if>
+                    <c:if test="${title != 'Ассассины'}">
+                        <colgroup>
+                            <col>
+                            <col style="width: 33%;">
+                        </colgroup>
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Действия</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${team}" var="r">
+
+                            <tr>
+                                <td>${r.username}</td>
+                                <td>
+                                    <form:form method="post"
+                                               action="/change-team?requestId=${id}&userToChangeId=${r.getId()}">
+                                        <button type="submit" class="btn btn-primary button">Выбрать</button>
+                                    </form:form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </c:if>
                 </table>
             </div>
         </c:if>

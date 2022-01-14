@@ -58,8 +58,10 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <form:label path="description">Описание</form:label>
-                            <form:input path="description" type="text" class="form-control"
-                                        required="required" onkeyup="lettersOnly(this)" maxlength="55"
+                            <form:textarea path="description"
+                                        type="textarea"
+                                        class="form-control"
+                                        required="required" onkeyup="lettersOnly(this)" maxlength="250"
                                         oninvalid="this.setCustomValidity('Введите описание')"
                                         oninput="this.setCustomValidity('')"/>
                         </fieldset>

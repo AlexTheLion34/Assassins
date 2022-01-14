@@ -33,8 +33,10 @@
                     </form:form>
                     <script>
                         function digitsOnly(input) {
-                            const regex = /[^1-9]/gi;
-                            input.value = input.value.replace(regex, "");
+                            const regex1 = /[^0-9]/gi;
+                            input.value = input.value.replace(regex1, "");
+                            const regex2 = /^0+\d*$/gi;
+                            input.value = input.value.replace(regex2, "");
                         }
                     </script>
                 </div>

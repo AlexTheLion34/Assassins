@@ -6,10 +6,6 @@
     <div class="alert-danger">
         <table id="error-info">
             <tr>
-                <td>Код ошибки:</td>
-                <td>${pageContext.response.status}</td>
-            </tr>
-            <tr>
                 <td>Сообщение:</td>
                 <td>Размер файла превышает 3мб</td>
             </tr>

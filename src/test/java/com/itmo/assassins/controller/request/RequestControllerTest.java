@@ -68,6 +68,22 @@ class RequestControllerTest {
     }
 
     @Test
+    void testGetAddRequestWithMaxPriceZero() throws Exception {
+
+        Mockito.when(securityService.getLoggedInUserName()).thenReturn("username");
+
+        Customer customer = new Customer();
+
+        Mockito.when(userService.findUserByUserName("username")).thenReturn(customer);
+        Mockito.when(userService.countMaxAffordablePrice(customer)).thenReturn(0L);
+
+        mockMvc.perform(get("/add-request"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("balance-error"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/balance-error.jsp"));
+    }
+
+    @Test
     void testPostAddRequest() throws Exception {
 
         RequestInfo requestInfo = new RequestInfo();
