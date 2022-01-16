@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 from sys import platform
 
@@ -129,3 +130,149 @@ def cabman(connect_db):
     yield
     query_del = "DELETE FROM assassins_user WHERE id = 109"
     connect_db.execute(query_del)
+
+
+@pytest.fixture
+def request_master(connect_db, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) values(10000, 6, 8, 1, 11, 9);
+        insert into request_info 
+            (aim, description, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+        values('Test aim', 'Test description', 0.3, 123, 12, 10, 'MODERATING', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+
+
+@pytest.fixture
+def request_gunsmith(connect_db, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) values(10000, 6, 8, 1, 11, 9);
+        insert into request_info 
+            (aim, description, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+        values('Test aim', 'Test description', 0.3, 123, 12, 10, 'PACKING_1', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+
+
+@pytest.fixture
+def request_cabman(connect_db, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) values(10000, 6, 8, 1, 11, 9);
+        insert into request_info 
+            (aim, description, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+        values('Test aim', 'Test description', 0.3, 123, 12, 10, 'PACKING_2', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+
+
+@pytest.fixture
+def request_executor(connect_db, request_clear_all_before, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) 
+            values(10000, 3, 8, 1, 11, 9);
+        insert into request_arsenal (num_of_bows, num_of_knives, num_of_shields, num_of_swords, request_id) 
+            values(1, 1, 1, 1, 10000); 
+        insert into request_road_equipment (carriage_required, num_of_horses, request_id) values(false, 0, 10000); 
+        insert into request_info 
+            (aim, description, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+            values('Test aim', 'Test description', 0.3, 123, 12, 10, 'EXECUTING', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+
+
+@pytest.fixture
+def request_customer(connect_db, request_clear_all_before, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) 
+            values(10000, 3, 8, 1, 11, 9);
+        insert into request_arsenal (num_of_bows, num_of_knives, num_of_shields, num_of_swords, request_id) 
+            values(1, 1, 1, 1, 10000); 
+        insert into request_road_equipment (carriage_required, num_of_horses, request_id) values(false, 0, 10000); 
+        insert into report (path, request_id) values('storage\file_example.pdf', 10000); 
+        insert into request_info 
+            (aim, description, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+            values('Test aim', 'Test description', 0.3, 123, 12, 10, 'CONFIRMING', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+    shutil.copy(str(Path(__file__).resolve().parent.joinpath('files\\file_example.pdf')), str(Path(__file__).resolve().parent.parent.parent.joinpath('storage')))
+
+
+@pytest.fixture
+def request_customer_rate(connect_db, request_clear_all_before, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) 
+            values(10000, 3, 8, 1, 11, 9);
+        insert into request_arsenal (num_of_bows, num_of_knives, num_of_shields, num_of_swords, request_id) 
+            values(1, 1, 1, 1, 10000); 
+        insert into request_road_equipment (carriage_required, num_of_horses, request_id) values(false, 0, 10000); 
+        insert into report (path, request_id) values('storage\file_example.pdf', 10000); 
+        insert into request_info 
+            (aim, description, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+            values('Test aim', 'Test description', 0.3, 123, 12, 10, 'EVALUATING', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+    shutil.copy(str(Path(__file__).resolve().parent.joinpath('files\\file_example.pdf')), str(Path(__file__).resolve().parent.parent.parent.joinpath('storage')))
+
+
+@pytest.fixture
+def request_customer_approve_rate(connect_db, request_clear_all_before, request_clear_all_after):
+    query = '''
+        insert into request (id, executor_id, master_id, owner_id, cabman_id, gunsmith_id) 
+            values(10000, 3, 8, 1, 11, 9);
+        insert into request_arsenal (num_of_bows, num_of_knives, num_of_shields, num_of_swords, request_id) 
+            values(1, 1, 1, 1, 10000); 
+        insert into request_road_equipment (carriage_required, num_of_horses, request_id) values(false, 0, 10000); 
+        insert into report (path, request_id) values('storage\file_example.pdf', 10000); 
+        insert into request_info 
+            (aim, description, rating, difficulty, possible_latitude, possible_longitude, price, status, type, request_id) 
+            values('Test aim', 'Test description', 3, 0.3, 123, 12, 10, 'PAYMENT_CONFIRMING', 'Артефакт', 10000);
+    '''
+    connect_db.execute(query)
+    shutil.copy(str(Path(__file__).resolve().parent.joinpath('files\\file_example.pdf')), str(Path(__file__).resolve().parent.parent.parent.joinpath('storage')))
+
+
+@pytest.fixture
+def request_clear_all_after(connect_db, remove_file_storage_after):
+    yield
+    query_del = '''
+        UPDATE executor SET busy = false;
+        DELETE FROM request_info;
+        DELETE FROM request_arsenal;
+        DELETE FROM request_road_equipment;
+        DELETE FROM report;
+        DELETE FROM request;
+    '''
+    connect_db.execute(query_del)
+
+
+@pytest.fixture
+def request_clear_all_before(connect_db):
+    query_del = '''
+        UPDATE executor SET busy = false;
+        DELETE FROM request_info;
+        DELETE FROM request_arsenal;
+        DELETE FROM request_road_equipment;
+        DELETE FROM report;
+        DELETE FROM request;
+    '''
+    connect_db.execute(query_del)
+
+
+def remove_file():
+    dirname = Path(__file__).resolve().parent.parent.parent.joinpath('storage')
+    files = os.listdir(dirname)
+    for file_name in files:
+        path_file = dirname.joinpath(file_name)
+        if os.path.exists(path_file):
+            os.remove(path_file)
+
+
+@pytest.fixture
+def remove_file_storage_after():
+    yield
+    remove_file()
+
+
+@pytest.fixture
+def remove_file_storage_before():
+    remove_file()

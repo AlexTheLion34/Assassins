@@ -19,14 +19,17 @@ class TestUI(BaseTestCase):
 
     def test_main_page_after_sign_in_customer(self):
         self.sign_in_site()
-        td_info = self.driver.find_element_by_id('user_info').find_elements_by_tag_name('tr>td')
-        assert td_info[1].text == 'Napoleon'
+        user_name = self.driver.find_element_by_id('user_name').text
+        assert user_name == 'Имя пользователя: Napoleon'
 
-        h3 = self.driver.find_element_by_tag_name('h3')
-        assert h3.text == 'Заказы'
+        h3 = self.driver.find_elements_by_tag_name('h3')
+        assert [el.text for el in h3] == ['Профиль', 'Заказы']
 
-        table_striped = self.driver.find_element_by_class_name('table-striped')
+        table_striped = self.driver.find_element_by_class_name('thead-light')
         ths = table_striped.find_elements_by_tag_name('thead>tr>th')
 
-        assert [th.text for th in ths] == ['Тип', 'Цель', 'Статус']
+        assert [th.text for th in ths] == ['Тип', 'Цель', 'Статус', 'Действия']
+
+        add_request_btn = self.driver.find_element_by_id('add_request')
+        assert add_request_btn.text == 'Новый заказ'
 

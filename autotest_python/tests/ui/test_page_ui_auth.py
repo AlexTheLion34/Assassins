@@ -1,4 +1,4 @@
-from parameterized import parameterized
+import pytest
 
 from tests.BaseTestCase import BaseTestCase
 
@@ -15,7 +15,8 @@ class TestAuthUI(BaseTestCase):
         assert h4.text == 'Вход'
 
         username_input = self.driver.find_element_by_name('username')
-        TestAuthUI.compare_requirement_attribute(username_input, ['name', 'placeholder'], ['username', 'Имя пользователя'])
+        TestAuthUI.compare_requirement_attribute(username_input, ['name', 'placeholder'],
+                                                 ['username', 'Имя пользователя'])
 
         password_input = self.driver.find_element_by_name('password')
         TestAuthUI.compare_requirement_attribute(password_input, ['name', 'placeholder'], ['password', 'Пароль'])
@@ -23,38 +24,38 @@ class TestAuthUI(BaseTestCase):
         btn_submit = self.driver.find_element_by_class_name('btn')
         assert btn_submit.get_attribute('value') == 'Войти'
 
-    @parameterized.expand([
+    @pytest.mark.parametrize('username', [
         # Customer
-        ['Napoleon'],
+        'Napoleon',
 
         # Masters Assassins
-        ['Master1'],
-        ['Master2'],
+        'Master1',
+        'Master2',
 
         # Gunsmith
-        ['Gunsmith1'],
-        ['Gunsmith2'],
+        'Gunsmith1',
+        'Gunsmith2',
 
         # Cabmans
-        ['Cabman1'],
-        ['Cabman2'],
+        'Cabman1',
+        'Cabman2',
 
         # Executor
-        ['Altair'],
-        ['Aragon'],
-        ['Gerald'],
-        ['Legolas'],
-        ['Gimli'],
+        'Altair',
+        'Aragon',
+        'Gerald',
+        'Legolas',
+        'Gimli',
     ])
     def test_auth_in_system_different_user(self, username):
         self.sign_in_site(username)
 
         assert self.driver.current_url == self.host + 'profile'
 
-        td_info = self.driver.find_element_by_id('user_info').find_elements_by_tag_name('tr>td')
-        assert td_info[1].text == username
+        user_name = self.driver.find_element_by_id('user_name').text
+        assert user_name == f'Имя пользователя: {username}'
 
-    @parameterized.expand([
+    @pytest.mark.parametrize('username,password', [
         # Customer
         ['Napoleon', 'qwe'],
         ['Nap', 'qwerty'],
