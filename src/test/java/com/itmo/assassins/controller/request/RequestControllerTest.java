@@ -57,14 +57,14 @@ class RequestControllerTest {
         Customer customer = new Customer();
 
         Mockito.when(userService.findUserByUserName("username")).thenReturn(customer);
-        Mockito.when(userService.countMaxAffordablePrice(customer)).thenReturn(300L);
+        Mockito.when(userService.countMaxAffordablePrice(customer)).thenReturn(300);
 
         mockMvc.perform(get("/add-request"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("request"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/request.jsp"))
                 .andExpect(model().attribute("requestInfo", is(any(RequestInfo.class))))
-                .andExpect(model().attribute("maxPrice", 300L));
+                .andExpect(model().attribute("maxPrice", 300));
     }
 
     @Test
@@ -75,7 +75,7 @@ class RequestControllerTest {
         Customer customer = new Customer();
 
         Mockito.when(userService.findUserByUserName("username")).thenReturn(customer);
-        Mockito.when(userService.countMaxAffordablePrice(customer)).thenReturn(0L);
+        Mockito.when(userService.countMaxAffordablePrice(customer)).thenReturn(0);
 
         mockMvc.perform(get("/add-request"))
                 .andExpect(status().isOk())
@@ -97,7 +97,7 @@ class RequestControllerTest {
         Mockito.when(difficultyComputationService.computeDifficulty(requestInfo))
                 .thenReturn(RequestDifficulty.HARD);
 
-        mockMvc.perform(post("/add-request").sessionAttr("requestInfo", requestInfo))
+        mockMvc.perform(post("/add-request").flashAttr("requestInfo", requestInfo))
                 .andExpect(status().is(302))
                 .andExpect(view().name("redirect:/profile"))
                 .andExpect(redirectedUrl("/profile"));
@@ -124,7 +124,7 @@ class RequestControllerTest {
                 .when(requestService)
                 .createRequest(ArgumentMatchers.any(), ArgumentMatchers.any());
 
-        mockMvc.perform(post("/add-request").sessionAttr("requestInfo", requestInfo))
+        mockMvc.perform(post("/add-request").flashAttr("requestInfo", requestInfo))
                 .andExpect(status().is(200))
                 .andExpect(view().name("executor-error"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/executor-error.jsp"));
@@ -232,5 +232,48 @@ class RequestControllerTest {
                 .andExpect(view().name("evaluate-request"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/evaluate-request.jsp"))
                 .andExpect(model().attribute("request", request));
+    }
+
+    @Test
+    void testPostPutRatingForRequest() throws Exception {
+
+        Request requestFromRepo = new Request();
+
+        Mockito.when(requestService.getRequestById(1))
+                .thenReturn(Optional.of(requestFromRepo));
+
+        Request request = new Request();
+        RequestInfo requestInfo = new RequestInfo();
+        requestInfo.setRating(5);
+        request.setRequestInfo(requestInfo);
+
+        Request updatedRequest = new Request();
+        RequestInfo updatedRequestInfo = new RequestInfo();
+        updatedRequestInfo.setRating(5);
+        updatedRequest.setRequestInfo(requestInfo);
+
+        Executor executor = new Executor();
+        updatedRequest.setExecutor(executor);
+
+        Mockito.when(requestService.putRatingForRequest(requestFromRepo, request.getRequestInfo().getRating()))
+                        .thenReturn(updatedRequest);
+
+        Mockito.when(securityService.getLoggedInUserName()).thenReturn("username");
+
+        Customer customer = new Customer();
+
+        Mockito.when(userService.findUserByUserName("username")).thenReturn(customer);
+
+        mockMvc.perform(post("/evaluate?requestId=1")
+                        .flashAttr("request", request))
+                .andExpect(status().is(302))
+                .andExpect(view().name("redirect:/profile"))
+                .andExpect(redirectedUrl("/profile"));
+
+        Mockito.verify(userService, Mockito.times(1))
+                .countRating(updatedRequest.getExecutor(), updatedRequest.getRequestInfo().getRating());
+
+        Mockito.verify(requestService, Mockito.times(1))
+                .saveRequest(updatedRequest);
     }
 }

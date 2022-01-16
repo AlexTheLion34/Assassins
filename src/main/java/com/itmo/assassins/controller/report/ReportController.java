@@ -47,9 +47,10 @@ public class ReportController {
 
         Report report = reportService.getReportById(Long.parseLong(id));
 
-        Path pathToFile = Paths.get(report.getPath());
+        Path pathToFile = reportService.getReportFile(report);
 
-        String fileName = "report." + pathToFile.toString().split("\\.")[1];
+        String fileName = "report." + pathToFile.toString()
+                .split("\\.")[1];
 
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
@@ -57,14 +58,13 @@ public class ReportController {
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
 
-        Resource resource = new ByteArrayResource(Files.readAllBytes(pathToFile));
-
-        return ResponseEntity
-                .ok()
+        return ResponseEntity.ok()
                 .headers(headers)
-                .contentLength(Paths.get(report.getPath()).toFile().length())
+                .contentLength(Paths.get(report.getPath())
+                        .toFile()
+                        .length())
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(resource);
+                .body(new ByteArrayResource(Files.readAllBytes(pathToFile)));
     }
 
     @RequestMapping(value = "/add-report", method = RequestMethod.GET)

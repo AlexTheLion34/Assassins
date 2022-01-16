@@ -45,7 +45,7 @@ public class RequestController {
 
         User currentUser = userService.findUserByUserName(securityService.getLoggedInUserName());
 
-        Long maxPrice = userService.countMaxAffordablePrice((Customer) currentUser);
+        int maxPrice = userService.countMaxAffordablePrice((Customer) currentUser);
 
         if (maxPrice == 0) {
             return "balance-error";

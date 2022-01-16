@@ -10,6 +10,8 @@ import com.itmo.assassins.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,17 +56,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void countRating(Executor executor, int requestRating) {
-        executor.setRating((executor.getRating() + requestRating) / (executor.getNumOfCompletedRequests() + 1));
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        decimalFormat.setRoundingMode(RoundingMode.CEILING);
+        double rating = Double.parseDouble(decimalFormat.format(
+                (executor.getRating() + requestRating) / (executor.getNumOfCompletedRequests() + 1))
+                .replace(",", "."));
+        executor.setRating(rating);
         executor.setNumOfCompletedRequests(executor.getNumOfCompletedRequests() + 1);
         saveUser(executor);
     }
 
     @Override
-    public Long countMaxAffordablePrice(Customer customer) {
-        return (long) (customer.getBalance() - customer.getRequests()
-                .stream()
-                .filter(r -> r.getRequestInfo().getStatus() != RequestStatus.DONE)
-                .map(r -> r.getRequestInfo().getPrice())
-                .reduce(0, Integer::sum));
+    public int countMaxAffordablePrice(Customer customer) {
+
+        if (customer.getBalance() == 0) {
+            return 0;
+        } else {
+
+            int sumOfCurrentRequests = customer.getRequests()
+                    .stream()
+                    .filter(r -> r.getRequestInfo().getStatus() != RequestStatus.DONE &&
+                            r.getRequestInfo().getStatus() != RequestStatus.EVALUATING &&
+                            r.getRequestInfo().getStatus() != RequestStatus.PAYMENT_CONFIRMING)
+                    .map(r -> r.getRequestInfo().getPrice())
+                    .reduce(0, Integer::sum);
+
+            if (sumOfCurrentRequests >= customer.getBalance()) {
+                return customer.getBalance();
+            } else {
+                return customer.getBalance() - sumOfCurrentRequests;
+            }
+        }
     }
 }

@@ -58,7 +58,7 @@ class EquipRequestControllerTest {
                         .thenReturn(Optional.of(request));
 
         mockMvc.perform(post("/add-arsenal?requestId=1")
-                        .sessionAttr("arsenal", arsenal))
+                        .flashAttr("arsenal", arsenal))
                 .andExpect(status().is(302))
                 .andExpect(view().name("redirect:/profile"))
                 .andExpect(redirectedUrl("/profile"));
@@ -89,7 +89,7 @@ class EquipRequestControllerTest {
                 .thenReturn(Optional.of(request));
 
         mockMvc.perform(post("/add-road-eq?requestId=1")
-                        .sessionAttr("equipment", equipment))
+                        .flashAttr("equipment", equipment))
                 .andExpect(status().is(302))
                 .andExpect(view().name("redirect:/profile"))
                 .andExpect(redirectedUrl("/profile"));

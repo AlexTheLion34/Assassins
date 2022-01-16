@@ -1,5 +1,6 @@
 package com.itmo.assassins.service.impl.report;
 
+import com.itmo.assassins.model.report.Report;
 import com.itmo.assassins.model.request.Request;
 import com.itmo.assassins.model.request.RequestInfo;
 import com.itmo.assassins.model.user.Executor;
@@ -15,7 +16,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(SpringExtension.class)
@@ -64,5 +67,14 @@ class ReportServiceImplTest {
 
         Mockito.verify(reportRepository, Mockito.times(1))
                 .save(any());
+    }
+
+    @Test
+    void getReportFile() {
+
+        Report report = new Report();
+        report.setPath("src/test/resources/test.pdf");
+
+        assertEquals(Paths.get(report.getPath()), reportService.getReportFile(report));
     }
 }

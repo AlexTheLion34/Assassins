@@ -14,5 +14,5 @@ public interface UserService {
     Set<User> findUserByRole(UserRole role);
     void saveUser(User user);
     void countRating(Executor executor, int requestRating);
-    Long countMaxAffordablePrice(Customer customer);
+    int countMaxAffordablePrice(Customer customer);
 }

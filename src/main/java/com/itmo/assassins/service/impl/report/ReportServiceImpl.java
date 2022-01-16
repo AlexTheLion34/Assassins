@@ -56,4 +56,9 @@ public class ReportServiceImpl implements ReportService {
 
         saveReport(report);
     }
+
+    @Override
+    public Path getReportFile(Report report) {
+        return Paths.get(report.getPath());
+    }
 }
