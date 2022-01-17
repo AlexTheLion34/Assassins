@@ -10,19 +10,19 @@
         </div>
         <div class="panel-body">
             <div class="container">
-                <label>
+                <label id="user_name">
                     Имя пользователя: ${user.username}
                 </label>
                 <br>
                 <c:if test="${user.getRole().name() eq 'CUSTOMER'
         or user.getRole().name() eq 'EXECUTOR'}">
-                    <label>
+                    <label id="user_balance">
                         Баланс: ${user.balance}
                     </label>
                 </c:if>
                 <br>
                 <c:if test="${user.getRole().name() eq 'EXECUTOR'}">
-                    <label>
+                    <label id="user_rating">
                         Рейтинг: ${user.rating}
                     </label>
                 </c:if>

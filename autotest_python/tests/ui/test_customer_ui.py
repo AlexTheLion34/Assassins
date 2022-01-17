@@ -1,7 +1,3 @@
-from parameterized import parameterized
-
-import pytest
-import time
 from tests.BaseTestCase import BaseTestCase
 
 
@@ -21,7 +17,7 @@ class TestUI(BaseTestCase):
 
         assert type_elm.get_attribute("type") == 'select-one'
         assert aim.get_attribute("type") == 'text'
-        assert description.get_attribute("type") == 'text'
+        assert description.get_attribute("type") == 'textarea'
         assert price.get_attribute("type") == 'number'
         assert possible_longitude.get_attribute("type") == 'number'
         assert possible_longitude.get_attribute("type") == 'number'
@@ -34,4 +30,5 @@ class TestUI(BaseTestCase):
 
         labels = self.driver.find_elements_by_tag_name('label')
         assert len(labels) == 6
-        assert [label.text for label in labels] == ['Тип', 'Цель', 'Цена', 'Возможная долгота', 'Возможная широта', 'Описание']
+        assert [label.text for label in labels] == ['Тип', 'Цель', 'Цена', 'Возможная долгота', 'Возможная широта',
+                                                    'Описание']

@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
-    <a class="btn btn-info" href="/change-request?id=${id}" role="button">Назад</a>
+    <a class="btn btn-info" id="back" href="/change-request?id=${id}" role="button">Назад</a>
     <br>
     <br/>
     <table>
